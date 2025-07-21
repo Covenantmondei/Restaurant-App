@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os, dotenv, dj_database_url
+
+dotenv.load_dotenv()
+
+DB_URL = os.environ.get('DATABASE_URL')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+    'Pyrestaurant',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +85,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+
+DATABASES["default"] = dj_database_url.parse(DB_URL)
+
+DATABASES["default"]["OPTIONS"] = {
+    "options": "-c search_path=pyrestaurant"
 }
 
 
