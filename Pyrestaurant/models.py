@@ -24,22 +24,23 @@ class Food(models.Model):
     def __str__(self):
         return self.name
 
-class Customers(models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
-    email = models.EmailField(unique=True)
-    phone = models.CharField(max_length=15, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name
 
 
 class Review(models.Model):
-    restaurant = models.ForeignKey(Restaurant, related_name='reviews', on_delete=models.CASCADE)
-    customer = models.ForeignKey(Customers, related_name='reviews', on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, related_name='reviews', on_delete=models.CASCADE, primary_key=True)
+    customer = models.CharField(max_length=100)
     rating = models.IntegerField()
     comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'Review by {self.customer.name} for {self.restaurant.name}'
+
+
+class Customers(models.Model):
+    resturant_name = models.OneToOneField(Review, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, primary_key=True)
+    order_no = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name

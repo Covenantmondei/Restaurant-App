@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Search</title>
+    <link rel="stylesheet" href="buy-style.css">
+</head>
+<body>
+<div class="header">
+    <h1>Restaurant Finder</h1>
+    <p>Discover amazing restaurants and delicious food</p>
+</div>
+
+<div class="search-container">
+    <input type="text" class="search-bar" id="searchInput" placeholder="Search for restaurants...">
+    <button class="search-btn" onclick="searchRestaurants()">🔍</button>
+</div>
+
+<div class="main-content">
+    <div class="restaurant-section">
+        <div id="restaurantResults">
+            <!-- Sample Restaurant Cards -->
+            <div class="restaurant-card">
+                <div class="restaurant-header">
+                    <h3 class="restaurant-name">Mario's Italian Bistro</h3>
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-number">4.8</span>
+                    </div>
+                </div>
+                <div class="restaurant-details">
+                    <div class="detail-item">
+                        <div class="detail-icon">🌍</div>
+                        <span class="detail-text">United States</span>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">📍</div>
+                        <span class="detail-text">California</span>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">🍝</div>
+                        <span class="detail-text">Italian</span>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">⭐</div>
+                        <span class="detail-text">Premium</span>
+                    </div>
+                </div>
+                <button class="buy-food-btn" onclick="openBuyFoodForm('Mario\'s Italian Bistro')">Buy Food</button>
+            </div>
+
+            <div class="restaurant-card">
+                <div class="restaurant-header">
+                    <h3 class="restaurant-name">Dragon Palace</h3>
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-number">4.5</span>
+                    </div>
+                </div>
+                <div class="restaurant-details">
+                    <div class="detail-item">
+                        <div class="detail-icon">🌍</div>
+                        <span class="detail-text">Canada</span>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">📍</div>
+                        <span class="detail-text">Ontario</span>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">🥢</div>
+                        <span class="detail-text">Chinese</span>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">⭐</div>
+                        <span class="detail-text">Popular</span>
+                    </div>
+                </div>
+                <button class="buy-food-btn" onclick="openBuyFoodForm('Dragon Palace')">Buy Food</button>
+            </div>
+
+            <div class="restaurant-card">
+                <div class="restaurant-header">
+                    <h3 class="restaurant-name">Spice Garden</h3>
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-number">4.9</span>
+                    </div>
+                </div>
+                <div class="restaurant-details">
+                    <div class="detail-item">
+                        <div class="detail-icon">🌍</div>
+                        <span class="detail-text">India</span>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">📍</div>
+                        <span class="detail-text">Mumbai</span>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">🌶️</div>
+                        <span class="detail-text">Indian</span>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">⭐</div>
+                        <span class="detail-text">Top Rated</span>
+                    </div>
+                </div>
+                <button class="buy-food-btn" onclick="openBuyFoodForm('Spice Garden')">Buy Food</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Top Customers</h3>
+            <div class="customer-item">
+                <div class="customer-avatar">JD</div>
+                <div class="customer-info">
+                    <h4>John Doe</h4>
+                    <p>127 orders • Gold Member</p>
+                </div>
+            </div>
+            <div class="customer-item">
+                <div class="customer-avatar">SM</div>
+                <div class="customer-info">
+                    <h4>Sarah Miller</h4>
+                    <p>89 orders • Silver Member</p>
+                </div>
+            </div>
+            <div class="customer-item">
+                <div class="customer-avatar">MJ</div>
+                <div class="customer-info">
+                    <h4>Mike Johnson</h4>
+                    <p>76 orders • Silver Member</p>
+                </div>
+            </div>
+            <div class="customer-item">
+                <div class="customer-avatar">EW</div>
+                <div class="customer-info">
+                    <h4>Emily Wilson</h4>
+                    <p>54 orders • Bronze Member</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Customer Reviews</h3>
+            <div class="review-item">
+                <div class="review-header">
+                    <span class="reviewer-name">Alex Chen</span>
+                    <span class="review-rating">★★★★★</span>
+                </div>
+                <p class="review-text">"Amazing food quality and fast delivery! Mario's pasta is absolutely delicious."</p>
+            </div>
+            <div class="review-item">
+                <div class="review-header">
+                    <span class="reviewer-name">Lisa Park</span>
+                    <span class="review-rating">★★★★☆</span>
+                </div>
+                <p class="review-text">"Great variety of dishes. The Dragon Palace never disappoints with their authentic flavors."</p>
+            </div>
+            <div class="review-item">
+                <div class="review-header">
+                    <span class="reviewer-name">David Kumar</span>
+                    <span class="review-rating">★★★★★</span>
+                </div>
+                <p class="review-text">"Spice Garden has the best Indian food in town. Highly recommended!"</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Buy Food Form Overlay -->
+<div class="form-overlay" id="formOverlay">
+    <div class="buy-food-form">
+        <button class="close-btn" onclick="closeBuyFoodForm()">&times;</button>
+        
+        <div class="form-header">
+            <h2>Buy Food</h2>
+            <p>Complete your order details</p>
+        </div>
+
+        <form id="buyFoodForm" action="#" method="POST">
+            <div class="form-group">
+                <label for="restaurantName">Restaurant Name <span class="required">*</span></label>
+                <input 
+                    type="text" 
+                    id="restaurantName" 
+                    name="restaurantName" 
+                    placeholder="Restaurant name"
+                    readonly
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="customerName">Customer Name <span class="required">*</span></label>
+                <input 
+                    type="text" 
+                    id="customerName" 
+                    name="customerName" 
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="foodName">Food Name <span class="required">*</span></label>
+                <select id="foodName" name="foodName" required>
+                    <option value="">Select your favorite dish</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="rating">Rating <span class="required">*</span></label>
+                <div class="rating-group">
+                    <div class="star-rating" id="starRating">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                    <span class="rating-text" id="ratingText">Select rating</span>
+                </div>
+                <input type="hidden" id="rating" name="rating" required>
+            </div>
+
+            <div class="form-group">
+                <label for="review">Review <span class="required">*</span></label>
+                <textarea 
+                    id="review" 
+                    name="review" 
+                    placeholder="Share your experience and thoughts about the food..."
+                    required
+                ></textarea>
+            </div>
+
+            <div class="form-buttons">
+                <button type="button" class="form-btn cancel-btn" onclick="closeBuyFoodForm()">Cancel</button>
+                <button type="submit" class="form-btn buy-btn">Buy Food</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Food options for different restaurants
+    const restaurantFoods = {
+        "Mario's Italian Bistro": [
+            "Spaghetti Carbonara",
+            "Margherita Pizza", 
+            "Chicken Parmigiana",
+            "Caesar Salad",
+            "Tiramisu",
+            "Lasagna Bolognese"
+        ],
+        "Dragon Palace": [
+            "Sweet & Sour Pork",
+            "Kung Pao Chicken",
+            "Beef Lo Mein",
+            "Dim Sum Platter",
+            "Fried Rice",
+            "Peking Duck"
+        ],
+        "Spice Garden": [
+            "Butter Chicken",
+            "Biryani",
+            "Palak Paneer",
+            "Tandoori Chicken",
+            "Naan Bread",
+            "Mango Lassi"
+        ]
+    };
+
+    let selectedRating = 0;
+
+    function searchRestaurants() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const restaurantCards = document.querySelectorAll('.restaurant-card');
+        let hasResults = false;
+
+        restaurantCards.forEach(card => {
+            const restaurantName = card.querySelector('.restaurant-name').textContent.toLowerCase();
+            const foodType = card.querySelector('.detail-text').textContent.toLowerCase();
+            
+            if (restaurantName.includes(searchTerm) || foodType.includes(searchTerm) || searchTerm === '') {
+                card.style.display = 'block';
+                hasResults = true;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Show/hide no results message
+        let noResultsDiv = document.getElementById('noResults');
+        if (!hasResults && searchTerm !== '') {
+            if (!noResultsDiv) {
+                noResultsDiv = document.createElement('div');
+                noResultsDiv.id = 'noResults';
+                noResultsDiv.className = 'no-results';
+                noResultsDiv.innerHTML = '<h3>No restaurants found</h3><p>Try searching with different keywords</p>';
+                document.getElementById('restaurantResults').appendChild(noResultsDiv);
+            }
+            noResultsDiv.style.display = 'block';
+        } else if (noResultsDiv) {
+            noResultsDiv.style.display = 'none';
+        }
+    }
+
+    function openBuyFoodForm(restaurantName) {
+        const overlay = document.getElementById('formOverlay');
+        const restaurantNameInput = document.getElementById('restaurantName');
+        const foodSelect = document.getElementById('foodName');
+        
+        // Set restaurant name
+        restaurantNameInput.value = restaurantName;
+        
+        // Populate food options
+        foodSelect.innerHTML = '<option value="">Select your favorite dish</option>';
+        if (restaurantFoods[restaurantName]) {
+            restaurantFoods[restaurantName].forEach(food => {
+                const option = document.createElement('option');
+                option.value = food;
+                option.textContent = food;
+                foodSelect.appendChild(option);
+            });
+        }
+        
+        // Reset form
+        document.getElementById('buyFoodForm').reset();
+        restaurantNameInput.value = restaurantName; // Keep restaurant name after reset
+        resetStarRating();
+        
+        // Show overlay
+        overlay.classList.add('show');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function closeBuyFoodForm() {
+        const overlay = document.getElementById('formOverlay');
+        overlay.classList.remove('show');
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+
+    // Star rating functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const stars = document.querySelectorAll('.star');
+        const ratingText = document.getElementById('ratingText');
+        const ratingInput = document.getElementById('rating');
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                selectedRating = parseInt(this.dataset.rating);
+                ratingInput.value = selectedRating;
+                updateStarDisplay();
+                updateRatingText();
+            });
+
+            star.addEventListener('mouseover', function() {
+                const hoverRating = parseInt(this.dataset.rating);
+                highlightStars(hoverRating);
+            });
+        });
+
+        document.getElementById('starRating').addEventListener('mouseleave', function() {
+            updateStarDisplay();
+        });
+    });
+
+    function highlightStars(rating) {
+        const stars = document.querySelectorAll('.star');
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+    }
+
+    function updateStarDisplay() {
+        highlightStars(selectedRating);
+    }
+
+    function updateRatingText() {
+        const ratingText = document.getElementById('ratingText');
+        const ratingLabels = {
+            1: 'Poor',
+            2: 'Fair', 
+            3: 'Good',
+            4: 'Very Good',
+            5: 'Excellent'
+        };
+        ratingText.textContent = selectedRating > 0 ? ratingLabels[selectedRating] : 'Select rating';
+    }
+
+    function resetStarRating() {
+        selectedRating = 0;
+        updateStarDisplay();
+        updateRatingText();
+        document.getElementById('rating').value = '';
+    }
+
+    // Form submission
+    document.getElementById('buyFoodForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const orderData = {
+            restaurantName: formData.get('restaurantName'),
+            customerName: formData.get('customerName'),
+            foodName: formData.get('foodName'),
+            rating: formData.get('rating'),
+            review: formData.get('review')
+        };
+        
+        // Here you would typically send the data to your Django API
+        console.log('Order submitted:', orderData);
+        alert(`Order placed successfully!
+
+Restaurant: ${orderData.restaurantName}
+Customer: ${orderData.customerName}
+Food: ${orderData.foodName}
+Rating: ${orderData.rating} stars
+Review: ${orderData.review}`);
+        
+        closeBuyFoodForm();
+    });
+
+    // Close form when clicking outside
+    document.getElementById('formOverlay').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeBuyFoodForm();
+        }
+    });
+
+    // Allow search on Enter key press
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchRestaurants();
+        }
+    });
+</script>
+</body>
+</html>
