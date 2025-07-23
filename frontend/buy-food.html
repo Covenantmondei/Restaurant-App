@@ -318,7 +318,7 @@
         
         // Populate food options
         foodSelect.innerHTML = '<option value="">Select your favorite dish</option>';
-        fetch(`http://127.0.0.1:8000/restaurant/buy?restaurant=${encodeURIComponent(restaurantName)}`)
+        fetch(`http://127.0.0.1:8000/pyrestaurant/buyfood?restaurant=${encodeURIComponent(restaurantName)}`)
         .then(response => response.json())
         .then(data => {
             data.forEach(food => {

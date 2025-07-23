@@ -13,3 +13,43 @@ class CreateRestaurant(APIView):
             return Response({"Message": f'{serializer.data["name"]} Resturant Created'})
         return Response({"Error":serializer.errors})
     
+
+class BuyFood(APIView):
+    def get(self, request):
+        restaurant_name = request.GET.get('restaurant')
+
+        foods = Food.objects.filter(restaname=restaurant_name)
+        serializer = FoodSerializer(foods, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        restaurant_name = request.data.get("restaurantName")
+        customer_name = request.data.get("customerName")
+        rating = request.data.get("rating")
+        comment = request.data.get("review")
+
+        data = {
+            "restaurant":restaurant_name,
+            "customer":customer_name,
+            "rating":rating,
+            "comment":comment
+        }
+
+        data2 = {
+            "restaurant":restaurant_name,
+            "name":customer_name
+        }
+
+        serializers = ReviewSerializer(data=data)
+        if serializers.is_valid():
+            serializers.save()
+        
+            serializers = CustomersSerializer(data=data2)
+            if serializers.is_valid():
+                num = Customers.objects.get(name=customer_name)
+                num.order_no += 1
+                num.save()
+                serializers.save()
+
+                return Response({"message":"Created customer"}, status=status.HTTP_201_CREATED)
+            return Response({"Message":"Review added successfully"}, status=status.HTTP_201_CREATED)
