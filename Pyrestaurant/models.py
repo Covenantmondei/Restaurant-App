@@ -40,7 +40,7 @@ class Review(models.Model):
 class Customers(models.Model):
     resturant_name = models.OneToOneField(Review, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, primary_key=True)
-    order_no = models.IntegerField(default=0)
+    order_no = models.IntegerField(default=0, null=True)
 
     def __str__(self):
         return self.name

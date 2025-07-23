@@ -318,14 +318,23 @@
         
         // Populate food options
         foodSelect.innerHTML = '<option value="">Select your favorite dish</option>';
-        if (restaurantFoods[restaurantName]) {
-            restaurantFoods[restaurantName].forEach(food => {
+        fetch(`http://127.0.0.1:8000/restaurant/buy?restaurant=${encodeURIComponent(restaurantName)}`)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(food => {
                 const option = document.createElement('option');
-                option.value = food;
-                option.textContent = food;
+                option.value = food.name;
+                option.textContent = food.name;
                 foodSelect.appendChild(option);
             });
-        }
+        })
+        .catch(error => {
+            console.error('Failed to fetch food:', error);
+            const option = document.createElement('option');
+            option.textContent = 'Error loading food options';
+            foodSelect.appendChild(option);
+        });
+
         
         // Reset form
         document.getElementById('buyFoodForm').reset();
