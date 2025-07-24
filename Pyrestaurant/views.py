@@ -21,7 +21,12 @@ class SearchRestaurant(APIView):
         try:
             if restaurant:
                 serializer = RestaurantSerializer(restaurant)
-                return Response(serializer.data)
+                food = Food.objects.filter(restaurant=restaurant)
+                food_serializer = FoodSerializer(food, many=True)
+                return Response({
+                    "restaurant": serializer.data,
+                    "foods": food_serializer.data
+                })
             return Response({"Error": "Restaurant not found"}, status=status.HTTP_404_NOT_FOUND)
         except Restaurant.DoesNotExist:
             return Response({"Error": "Restaurant not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -87,3 +92,11 @@ class BuyFood(APIView):
 
                 return Response({"message":"Created customer"}, status=status.HTTP_201_CREATED)
             return Response({"Message":"Review added successfully"}, status=status.HTTP_201_CREATED)
+        
+
+class GetFood(APIView):
+    def get(self, request):
+        restaurant_name = request.GET.get('restaurant')
+        foods = Food.objects.filter(restaurant__name=restaurant_name)
+        serializer = FoodSerializer(foods, many=True)
+        return Response(serializer.data)

@@ -1,4 +1,4 @@
-function createRestaurantCard(restaurant) {
+function createRestaurantCard(restaurant, foods) {
     return `
     <div class="restaurant-card">
         <div class="restaurant-header">
@@ -22,7 +22,13 @@ function createRestaurantCard(restaurant) {
                 <span class="detail-text">${restaurant.type}</span>
             </div>
         </div>
-        <button class="buy-food-btn" onclick="openBuyFoodForm('${restaurant.name.replace(/'/g, "\\'")}')">Buy Food</button>
+        <div class="food-list">
+            <h4>Menu</h4>
+            <ul>
+                ${foods.map(food => `<li>${food.name} - $${food.price}</li>`).join('')}
+            </ul>
+        </div>
+        <button class="buy-food-btn" onclick="openBuyFoodForm('${restaurant.name.replace(/'/g, "\\'")}', ${encodeURIComponent(JSON.stringify(foods))})">Buy Food</button>
     </div>
     `;
 }
@@ -38,10 +44,10 @@ async function searchRestaurants() {
     }
 
     try {
-        const response = await fetch(`http://127.0.0.1:8000/pyrestaurant/search?restaurant=${encodeURIComponent(searchTerm)}`);
+        const response = await fetch(`http://127.0.0.1:8000/pyrestaurant/search/?restaurant=${encodeURIComponent(searchTerm)}`);
         if (response.ok) {
-            const restaurant = await response.json();
-            const cardsHtml = createRestaurantCard(restaurant);
+            const data = await response.json();
+            const cardsHtml = createRestaurantCard(data.restaurant, data.foods);
             resultsDiv.innerHTML = cardsHtml;
         } else {
             resultsDiv.innerHTML = '<div class="no-results"><h3>No restaurants found</h3><p>Try searching with different keywords</p></div>';
