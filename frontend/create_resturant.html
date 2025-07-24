@@ -12,7 +12,7 @@
             <h1>Create Restaurant</h1>
             <p>Add your restaurant to our directory</p>
         </div>
-        <form id="restaurantForm" action="http://127.0.0.1:8000/pyrestaurant/create_resturant" method="POST">
+        <form id="restaurantForm" action="http://127.0.0.1:8000/pyrestaurant/create" method="POST">
             <div class="form-group">
                 <label for="name">Restaurant Name <span class="required">*</span></label>
                 <input 
@@ -103,7 +103,7 @@
         const formData = new FormData(form);
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/pyrestaurant/create_resturant', {
+            const response = await fetch('http://127.0.0.1:8000/pyrestaurant/create', {
                 method: 'POST',
                 body: formData,
                 // headers: {

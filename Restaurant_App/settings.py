@@ -56,14 +56,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-# ...existing code...
 ]
-# CORS settings for credentialed requests
+
+
+
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
     'http://localhost:5000',
+    'http://127.0.0.1:5500', 
+    'http://localhost:5500',
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -101,7 +104,7 @@ DATABASES = {
 DATABASES["default"] = dj_database_url.parse(DB_URL)
 
 DATABASES["default"]["OPTIONS"] = {
-    "options": "-c search_path=pyrestaurant"
+    "options": "-c search_path=newrestaurant"
 }
 
 
