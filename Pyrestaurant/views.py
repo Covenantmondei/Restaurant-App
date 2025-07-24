@@ -17,13 +17,23 @@ class CreateRestaurant(APIView):
 class SearchRestaurant(APIView):
     def get(self, request):
         restaurant_name = request.GET.get('restaurant')
+        restaurant = Restaurant.objects.filter(name__icontains=restaurant_name).first()
         try:
-            restaurant = Restaurant.objects.get(name=restaurant_name)
-            serializer = RestaurantSerializer(restaurant)
-            return Response(serializer.data)
+            if restaurant:
+                serializer = RestaurantSerializer(restaurant)
+                return Response(serializer.data)
+            return Response({"Error": "Restaurant not found"}, status=status.HTTP_404_NOT_FOUND)
         except Restaurant.DoesNotExist:
             return Response({"Error": "Restaurant not found"}, status=status.HTTP_404_NOT_FOUND)
     
+
+class GetAllRestaurants(APIView):
+    def get(self, request):
+        restaurants = Restaurant.objects.all()
+        serializer = RestaurantSerializer(restaurants, many=True)
+        return Response(serializer.data)
+    
+
 
 class AddFood(APIView):
 
