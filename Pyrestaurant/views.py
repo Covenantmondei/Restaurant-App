@@ -12,7 +12,31 @@ class CreateRestaurant(APIView):
             serializer.save()
             return Response({"Message": f'{serializer.data["name"]} Resturant Created'})
         return Response({"Error":serializer.errors})
+
+
+class SearchRestaurant(APIView):
+    def get(self, request):
+        restaurant_name = request.GET.get('restaurant')
+        try:
+            restaurant = Restaurant.objects.get(name=restaurant_name)
+            serializer = RestaurantSerializer(restaurant)
+            return Response(serializer.data)
+        except Restaurant.DoesNotExist:
+            return Response({"Error": "Restaurant not found"}, status=status.HTTP_404_NOT_FOUND)
     
+
+class AddFood(APIView):
+
+    def post(self, request):
+        try:
+            serializer = FoodSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response({"Message": f'{serializer.data["name"]} Food Added Successfully'})
+            return Response({"Error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({"Error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
 
 class BuyFood(APIView):
     def get(self, request):
@@ -53,4 +77,3 @@ class BuyFood(APIView):
 
                 return Response({"message":"Created customer"}, status=status.HTTP_201_CREATED)
             return Response({"Message":"Review added successfully"}, status=status.HTTP_201_CREATED)
-        
