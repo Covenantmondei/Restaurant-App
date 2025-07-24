@@ -43,3 +43,26 @@ function resetForm() {
 // function goToRestaurant() {
 //     window.location.href = 'index.html';
 // }
+
+async function populateRestaurants() {
+    const select = document.getElementById('restaurant');
+    try {
+        const response = await fetch('http://127.0.0.1:8000/pyrestaurant/all');
+        if (response.ok) {
+            const data = await response.json();
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.restaurant.id;
+                option.textContent = item.restaurant.name;
+                select.appendChild(option);
+            });
+        } else {
+            select.innerHTML = '<option value="">Failed to load restaurants</option>';
+        }
+    } catch (error) {
+        select.innerHTML = '<option value="">Error loading restaurants</option>';
+    }
+}
+
+// Call on page load
+window.addEventListener('DOMContentLoaded', populateRestaurants);

@@ -104,7 +104,7 @@ DATABASES = {
 DATABASES["default"] = dj_database_url.parse(DB_URL)
 
 DATABASES["default"]["OPTIONS"] = {
-    "options": "-c search_path=newrestaurant"
+    "options": "-c search_path=restaurant_backend"
 }
 
 
