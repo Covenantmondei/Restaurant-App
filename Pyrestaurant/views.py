@@ -35,8 +35,16 @@ class SearchRestaurant(APIView):
 class GetAllRestaurants(APIView):
     def get(self, request):
         restaurants = Restaurant.objects.all()
-        serializer = RestaurantSerializer(restaurants, many=True)
-        return Response(serializer.data)
+        data = []
+        for restaurant in restaurants:
+            restaurant_data = RestaurantSerializer(restaurant).data
+            foods = Food.objects.filter(restaurant=restaurant)
+            foods_data = FoodSerializer(foods, many=True).data
+            data.append({
+                "restaurant": restaurant_data,
+                "foods": foods_data
+            })
+        return Response(data)
     
 
 

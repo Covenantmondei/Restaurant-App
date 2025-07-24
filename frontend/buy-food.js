@@ -67,7 +67,9 @@ async function loadAllRestaurants() {
             if (restaurants.length === 0) {
                 resultsDiv.innerHTML = '<div class="no-results"><h3>No restaurants found.</h3></div>';
             } else {
-                resultsDiv.innerHTML = restaurants.map(createRestaurantCard).join('');
+                resultsDiv.innerHTML = restaurants
+                    .map(item => createRestaurantCard(item.restaurant, item.foods))
+                    .join('');
             }
         } else {
             resultsDiv.innerHTML = '<div class="no-results"><h3>Error loading restaurants.</h3></div>';
