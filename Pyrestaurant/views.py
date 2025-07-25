@@ -74,16 +74,17 @@ class BuyFood(APIView):
         customer_name = request.data.get("customerName")
         rating = request.data.get("rating")
         comment = request.data.get("review")
+        rid = Restaurant.objects.get(name=restaurant_name).id
 
         data = {
-            "restaurant":restaurant_name,
+            "restaurant":rid,
             "customer":customer_name,
             "rating":rating,
             "comment":comment
         }
 
         data2 = {
-            "restaurant":restaurant_name,
+            "resturant_name":rid,
             "name":customer_name
         }
 
@@ -93,13 +94,16 @@ class BuyFood(APIView):
         
             serializers = CustomersSerializer(data=data2)
             if serializers.is_valid():
+                serializers.save()
                 num = Customers.objects.get(name=customer_name)
                 num.order_no += 1
                 num.save()
-                serializers.save()
 
                 return Response({"message":"Created customer"}, status=status.HTTP_201_CREATED)
+            else:
+                return Response({"error":serializers.errors})
             return Response({"Message":"Review added successfully"}, status=status.HTTP_201_CREATED)
+        return Response({"error":serializers.errors})
         
 
 class GetFood(APIView):

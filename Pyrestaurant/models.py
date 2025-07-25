@@ -37,7 +37,7 @@ class Review(models.Model):
 
 
 class Customers(models.Model):
-    resturant_name = models.OneToOneField(Review, on_delete=models.CASCADE)
+    resturant_name = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     order_no = models.IntegerField(default=0, null=True)
 
