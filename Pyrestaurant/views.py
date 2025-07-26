@@ -24,7 +24,6 @@ class SearchRestaurant(APIView):
             food = Food.objects.filter(restaurant=restaurant)
             food_serializer = FoodSerializer(food, many=True)
 
-            # 🔥 Filter related reviews and customers for this restaurant
             reviews = Review.objects.filter(restaurant=restaurant)
             reviews_serializer = ReviewSerializer(reviews, many=True)
 
@@ -87,7 +86,7 @@ class BuyFood(APIView):
         rid = Restaurant.objects.get(name=restaurant_name).id
 
         data = {
-            "restaurant":rid,
+            "restaurant":rid,   
             "customer":customer_name,
             "rating":rating,
             "comment":comment
