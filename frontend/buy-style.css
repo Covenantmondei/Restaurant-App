@@ -475,6 +475,10 @@ body {
     box-shadow: 0 10px 25px rgba(108, 117, 125, 0.3);
 }
 
+ul{
+    list-style: none;
+}
+
 @media (max-width: 768px) {
     .main-content {
         grid-template-columns: 1fr;

@@ -5,7 +5,7 @@ class Restaurant(models.Model):
     country = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     type = models.CharField(max_length=50)
-    rating = models.FloatField(null=True)
+    rating = models.FloatField(null=True, default=5)
     image = models.ImageField(upload_to='restaurant_images/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

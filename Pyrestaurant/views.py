@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from .models import Restaurant,Food,Review,Customers
-from .serializers import RestaurantSerializer,FoodSerializer,CustomersSerializer,ReviewSerializer
+from .models import *
+from .serializers import *
 
 class CreateRestaurant(APIView):
     def post(self,request):
@@ -18,23 +18,33 @@ class SearchRestaurant(APIView):
     def get(self, request):
         restaurant_name = request.GET.get('restaurant')
         restaurant = Restaurant.objects.filter(name__icontains=restaurant_name).first()
-        try:
-            if restaurant:
-                serializer = RestaurantSerializer(restaurant)
-                food = Food.objects.filter(restaurant=restaurant)
-                food_serializer = FoodSerializer(food, many=True)
-                return Response({
-                    "restaurant": serializer.data,
-                    "foods": food_serializer.data
-                })
-            return Response({"Error": "Restaurant not found"}, status=status.HTTP_404_NOT_FOUND)
-        except Restaurant.DoesNotExist:
-            return Response({"Error": "Restaurant not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        if restaurant:
+            serializer = RestaurantSerializer(restaurant)
+            food = Food.objects.filter(restaurant=restaurant)
+            food_serializer = FoodSerializer(food, many=True)
+
+            # 🔥 Filter related reviews and customers for this restaurant
+            reviews = Review.objects.filter(restaurant=restaurant)
+            reviews_serializer = ReviewSerializer(reviews, many=True)
+
+            customers = Customers.objects.filter(resturant_name=restaurant).order_by('-order_no')[:5]
+            customers_serializer = CustomersSerializer(customers, many=True)
+
+            return Response({
+                "restaurant": serializer.data,
+                "foods": food_serializer.data,
+                "reviews": reviews_serializer.data,
+                "customers": customers_serializer.data,
+            })
+
+        return Response({"Error": "Restaurant not found"}, status=status.HTTP_404_NOT_FOUND)
+
     
 
 class GetAllRestaurants(APIView):
     def get(self, request):
-        restaurants = Restaurant.objects.all()
+        restaurants = Restaurant.objects.all()[:3]
         data = []
         for restaurant in restaurants:
             restaurant_data = RestaurantSerializer(restaurant).data
@@ -88,6 +98,11 @@ class BuyFood(APIView):
             "name":customer_name
         }
 
+        restaurant = Restaurant.objects.get(name=rid)
+        restaurant.rating += rating
+        restaurant.rating/2
+        restaurant.save()
+
         serializers = ReviewSerializer(data=data)
         if serializers.is_valid():
             serializers.save()
@@ -112,3 +127,17 @@ class GetFood(APIView):
         foods = Food.objects.filter(restaurant__name=restaurant_name)
         serializer = FoodSerializer(foods, many=True)
         return Response(serializer.data)
+    
+
+class TopCustomers(APIView):
+    def get(self, request):
+        customers = Customers.objects.order_by('-order_no')[:5]
+        serializers = CustomersSerializer(customers, many=True)
+        return Response(serializers.data)
+    
+
+class TopReviews(APIView):
+    def get(self, request):
+        reviews = Review.objects.all()[:5]
+        serializers = ReviewSerializer(reviews, many=True)
+        return Response(serializers.data)

@@ -8,4 +8,6 @@ urlpatterns = [
     path("food/add", AddFood.as_view(), name="addFood"),
     path("all", GetAllRestaurants.as_view(), name="allRestaurants"),
     path("food/get", GetFood.as_view(), name="getFood"),
+    path("customers/", TopCustomers.as_view(), name="topcustomers"),
+    path("reviews/", TopReviews.as_view(), name="topreviews")
 ]

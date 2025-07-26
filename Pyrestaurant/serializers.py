@@ -12,11 +12,15 @@ class FoodSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CustomersSerializer(serializers.ModelSerializer):
+    restaurant_name = serializers.CharField(source='resturant_name.name', read_only=True)
+
     class Meta:
         model = Customers
-        fields = '__all__'
+        fields = ['id', 'name', 'order_no', 'restaurant_name']
 
 class ReviewSerializer(serializers.ModelSerializer):
+    restaurant_name = serializers.CharField(source='restaurant.name', read_only=True)
+    
     class Meta:
         model = Review
         fields = '__all__'
