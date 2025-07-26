@@ -98,7 +98,7 @@ class BuyFood(APIView):
             "name":customer_name
         }
 
-        restaurant = Restaurant.objects.get(name=rid)
+        restaurant = Restaurant.objects.get(id=rid)
         restaurant.rating += rating
         restaurant.rating/2
         restaurant.save()
