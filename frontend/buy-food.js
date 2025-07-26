@@ -314,3 +314,34 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching top customers:', error);
         });
 });
+
+ document.addEventListener('DOMContentLoaded', function () {
+    const buyFoodForm = document.getElementById('buyFoodForm');
+
+    buyFoodForm.addEventListener('submit', async function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData(buyFoodForm);
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/pyrestaurant/food/buy', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                alert("🎉 Food order placed successfully!");
+                closeBuyFoodForm();
+                buyFoodForm.reset();
+                resetStarRating();
+            } else {
+                const errorData = await response.json();
+                alert("❌ Failed to place order. " + (errorData.detail || 'Please try again.'));
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            alert("❌ An error occurred. Please try again later.");
+        }
+    });
+});
+
