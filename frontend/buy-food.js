@@ -5,7 +5,7 @@ function createRestaurantCard(restaurant, foods) {
             <h3 class="restaurant-name">${restaurant.name}</h3>
             <div class="rating">
                 <span class="stars">${'★'.repeat(Math.round(restaurant.rating || 0))}${'☆'.repeat(5 - Math.round(restaurant.rating || 0))}</span>
-                <span class="rating-number">${restaurant.rating ? restaurant.rating.toFixed(1) : 'N/A'}</span>
+                <span class="rating-number">${restaurant.rating ? restaurant.rating.toFixed(1) : '0'}</span>
             </div>
         </div>
         <div class="restaurant-details">
@@ -34,6 +34,7 @@ function createRestaurantCard(restaurant, foods) {
 }
 
 async function searchRestaurants() {
+    console.trace("searchRestaurants triggered");
     const searchTerm = document.getElementById('searchInput').value.trim();
     const resultsDiv = document.getElementById('restaurantResults');
     const customerContainer = document.getElementById('topCustomers');
@@ -48,6 +49,7 @@ async function searchRestaurants() {
         return;
     }
 
+    console.log("Searching for:", searchTerm);
     try {
         const response = await fetch(`http://127.0.0.1:8000/pyrestaurant/search/?restaurant=${encodeURIComponent(searchTerm)}`);
         if (response.ok) {
@@ -67,7 +69,7 @@ async function searchRestaurants() {
                             <div class="customer-avatar">${customer.name.slice(0, 2).toUpperCase()}</div>
                             <div class="customer-info">
                                 <h4>${customer.name}</h4>
-                                <p>${customer.order_no} orders • ${customer.restaurant_name}</p>
+                                <p>${customer.order_no} orders • ${customer.restaurant}</p>
                             </div>
                         </div>
                     `;
@@ -77,7 +79,7 @@ async function searchRestaurants() {
                 customerContainer.innerHTML = '<p>No top customers found.</p>';
             }
 
-            // Show reviews
+            // Show reviews for the restaurant that has been searched
             if (data.reviews && data.reviews.length > 0) {
                 data.reviews.forEach(review => {
                     const item = document.createElement('div');
@@ -86,6 +88,7 @@ async function searchRestaurants() {
                         <div class="review-item">
                             <div class="review-header">
                                 <span class="reviewer-name">${review.customer} • ${review.restaurant_name}</span>
+                                <span class="review-rating">${'★'.repeat(Math.round(review.rating || 0))}${'☆'.repeat(5 - Math.round(review.rating || 0))}</span>
                             </div>
                             <p class="review-text">"${review.comment}"</p>
                         </div>
@@ -169,6 +172,38 @@ function closeBuyFoodForm() {
     document.body.style.overflow = 'auto'; // Restore scrolling
 }
 
+// Success message functions
+function showSuccessMessage() {
+    const form = document.getElementById('buyFoodForm');
+    const successMessage = document.getElementById('successMessage');
+    
+    form.style.display = 'none';
+    successMessage.style.display = 'block';
+}
+
+function resetBuyForm() {
+    const form = document.getElementById('buyFoodForm');
+    const successMessage = document.getElementById('successMessage');
+    const restaurantNameInput = document.getElementById('restaurantName');
+
+    const savedRestaurantName = restaurantNameInput.value;  // ✅ Save it before reset
+
+    form.style.display = 'block';
+    successMessage.style.display = 'none';
+    form.reset();
+    resetStarRating();
+
+    restaurantNameInput.value = savedRestaurantName;  // ✅ Restore it
+}
+
+
+// FIXED: Browse More now refreshes the whole page
+function goToSearch() {
+    closeBuyFoodForm();
+    // Refresh the entire page to show all restaurants
+    window.location.reload();
+}
+
 // Star rating functionality
 function highlightStars(rating) {
     const stars = document.querySelectorAll('.star');
@@ -231,6 +266,64 @@ window.addEventListener('DOMContentLoaded', function() {
         updateStarDisplay();
     });
 
+    // Form submission handler
+    document.getElementById('buyFoodForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const restaurantName = document.getElementById('restaurantName').value.trim();
+    const customerName = document.getElementById('customerName').value.trim();
+    const rating = parseInt(document.getElementById('rating').value);
+    const review = document.getElementById('review').value.trim();
+
+    if (!restaurantName || !customerName || !rating || !review) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    // Show loader
+    document.getElementById('buyFoodForm').style.display = 'none';
+    document.getElementById('loadingSpinner').style.display = 'flex';
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/pyrestaurant/food/buy", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                restaurantName,
+                customerName,
+                rating,
+                review
+            })
+        });
+
+        const result = await response.json();
+
+        document.getElementById('loadingSpinner').style.display = 'none';
+
+        if (response.ok) {
+            document.getElementById('successMessage').style.display = 'block';
+        } else {
+            alert(result.error || "Something went wrong.");
+            document.getElementById('buyFoodForm').style.display = 'block';
+        }
+
+    } catch (err) {
+        console.error("Submit error:", err);
+        alert("Failed to connect to server.");
+        document.getElementById('loadingSpinner').style.display = 'none';
+        document.getElementById('buyFoodForm').style.display = 'block';
+    }
+});
+
+function closeOrderOverlay() {
+    document.getElementById('orderOverlay').style.display = 'none';
+    document.getElementById('buyFoodForm').style.display = 'block';
+    document.getElementById('successMessage').style.display = 'none';
+    document.getElementById('loadingSpinner').style.display = 'none';
+}
+
 
     // Close form when clicking outside
     document.getElementById('formOverlay').addEventListener('click', function(e) {
@@ -271,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <div class="customer-avatar">${customer.name.slice(0, 2).toUpperCase()}</div>
                         <div class="customer-info">
                             <h4>${customer.name}</h4>
-                            <p>${customer.order_no} orders • ${customer.restaurant_name}</p>
+                            <p>${customer.order_no} orders • ${customer.restaurant}</p>
                         </div>
                     </div>
                 `;
@@ -282,7 +375,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching top customers:', error);
         });
 });
-
 
 document.addEventListener('DOMContentLoaded', function () {
     fetch('http://127.0.0.1:8000/pyrestaurant/reviews/')
@@ -303,6 +395,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="review-item">
                         <div class="review-header">
                             <span class="reviewer-name">${reviews.customer} • ${reviews.restaurant_name}</span>
+                            <span class="review-rating">${'★'.repeat(Math.round(reviews.rating || 0))}${'☆'.repeat(5 - Math.round(reviews.rating || 0))}</span>
                         </div>
                         <p class="review-text">"${reviews.comment}"</p>
                     </div>
@@ -314,34 +407,3 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching top customers:', error);
         });
 });
-
- document.addEventListener('DOMContentLoaded', function () {
-    const buyFoodForm = document.getElementById('buyFoodForm');
-
-    buyFoodForm.addEventListener('submit', async function (e) {
-        e.preventDefault(); // Prevent default form submission
-
-        const formData = new FormData(buyFoodForm);
-
-        try {
-            const response = await fetch('http://127.0.0.1:8000/pyrestaurant/food/buy', {
-                method: 'POST',
-                body: formData
-            });
-
-            if (response.ok) {
-                alert("🎉 Food order placed successfully!");
-                closeBuyFoodForm();
-                buyFoodForm.reset();
-                resetStarRating();
-            } else {
-                const errorData = await response.json();
-                alert("❌ Failed to place order. " + (errorData.detail || 'Please try again.'));
-            }
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            alert("❌ An error occurred. Please try again later.");
-        }
-    });
-});
-

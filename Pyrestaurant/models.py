@@ -5,8 +5,7 @@ class Restaurant(models.Model):
     country = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     type = models.CharField(max_length=50)
-    rating = models.FloatField(null=True, default=5)
-    image = models.ImageField(upload_to='restaurant_images/', blank=True, null=True)
+    rating = models.FloatField(null=True, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def _str_(self):
@@ -39,7 +38,7 @@ class Review(models.Model):
 class Customers(models.Model):
     resturant_name = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    order_no = models.IntegerField(default=0, null=True)
+    order_no = models.IntegerField(default=0, blank=True, null=True)
 
     def _str_(self):
         return self.name

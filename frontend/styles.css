@@ -4,14 +4,26 @@
     box-sizing: border-box;
 }
 
+/* Updated body styles to work with navigation */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main content wrapper for pages with navigation */
+.main-wrapper {
+    padding-top: 60px !important;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    min-height: calc(100vh - 130px);
+    width: 100%;
 }
 
 .container {
@@ -21,6 +33,7 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 500px;
+    margin: 0 auto;
 }
 
 .header {
@@ -61,6 +74,30 @@ body {
     font-size: 1rem;
     transition: all 0.3s ease;
     background-color: #f8f9fa;
+    /* FIXED: Limit dropdown height and add scroll */
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.form-group select {
+    /* Ensure dropdown doesn't cover the whole screen */
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+    padding-right: 40px;
+}
+
+/* Style the dropdown options */
+.form-group select option {
+    padding: 10px;
+    background-color: white;
+    color: #333;
+}
+
+.form-group select option:hover {
+    background-color: #f8f9fa;
 }
 
 .form-group input:focus,
@@ -73,6 +110,13 @@ body {
 
 .form-group input::placeholder {
     color: #adb5bd;
+}
+
+/* Disabled state for state dropdown */
+.form-group select:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
 }
 
 .create-btn {
@@ -208,10 +252,199 @@ body {
     }
 }
 
-@media (max-width: 600px) {
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Navigation Styles */
+.nav-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.nav-logo {
+    flex-shrink: 0;
+}
+
+.nav-logo h2 {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover .nav-icon {
+    transform: scale(1.2);
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link.active::before {
+    width: 80%;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 50px;
+        gap: 20px;
+        transition: left 0.3s ease;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-link {
+        font-size: 1.2rem;
+        padding: 15px 30px;
+        width: 250px;
+        justify-content: center;
+    }
+
+    .nav-container {
+        padding: 0 15px;
+    }
+
+    .nav-logo h2 {
+        font-size: 1.5rem;
+    }
+
+    .main-wrapper {
+        padding-top: 30px !important;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        min-height: calc(100vh - 100px);
+    }
+
     .container {
         padding: 30px 20px;
-        margin: 10px;
+        margin: 0 auto;
+        max-width: 90%;
     }
 
     .header h1 {
@@ -246,17 +479,25 @@ body {
         width: 100%;
         max-width: 250px;
     }
-}
 
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
 }
 
 @media (max-width: 480px) {
     .form-row {
         grid-template-columns: 1fr;
         gap: 0;
+    }
+    
+    .container {
+        max-width: 95%;
+        padding: 25px 15px;
+    }
+    
+    .main-wrapper {
+        padding-top: 20px !important;
     }
 }

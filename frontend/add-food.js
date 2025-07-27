@@ -40,9 +40,6 @@ function resetForm() {
     document.getElementById('foodForm').reset();
 }
 
-// function goToRestaurant() {
-//     window.location.href = 'index.html';
-// }
 
 async function populateRestaurants() {
     const select = document.getElementById('restaurant');

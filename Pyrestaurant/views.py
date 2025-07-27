@@ -43,7 +43,15 @@ class SearchRestaurant(APIView):
 
 class GetAllRestaurants(APIView):
     def get(self, request):
-        restaurants = Restaurant.objects.all()[:3]
+        restaurants = Restaurant.objects.order_by('-created_at')[:5]
+        rating = Restaurant.objects.all()
+
+        for i in rating:
+            if i.rating > 5:
+                i.rating = 5
+                i.save()
+
+        
         data = []
         for restaurant in restaurants:
             restaurant_data = RestaurantSerializer(restaurant).data
@@ -73,8 +81,9 @@ class AddFood(APIView):
 class BuyFood(APIView):
     def get(self, request):
         restaurant_name = request.GET.get('restaurant')
+        restid = Restaurant.objects.get(name=restaurant_name).id
 
-        foods = Food.objects.filter(restaname=restaurant_name)
+        foods = Food.objects.filter(restaurant=restid)
         serializer = FoodSerializer(foods, many=True)
         return Response(serializer.data)
     
@@ -94,13 +103,10 @@ class BuyFood(APIView):
 
         data2 = {
             "resturant_name":rid,
-            "name":customer_name
+            "name":customer_name,
+            "rating":rating
         }
 
-        restaurant = Restaurant.objects.get(id=rid)
-        restaurant.rating += rating
-        restaurant.rating/2
-        restaurant.save()
 
         serializers = ReviewSerializer(data=data)
         if serializers.is_valid():
@@ -108,10 +114,25 @@ class BuyFood(APIView):
         
             serializers = CustomersSerializer(data=data2)
             if serializers.is_valid():
-                serializers.save()
-                num = Customers.objects.get(name=customer_name)
-                num.order_no += 1
-                num.save()
+                customers = Customers.objects.filter(resturant_name=rid)
+                if customers.filter(name=customer_name).exists():
+                    i = customers.get(name=customer_name)
+                    i.order_no +=1
+                    i.save()
+                else:
+                    serializers.save()
+                    num = customers.get(name=customer_name)
+                    num.order_no += 1
+                    num.save()
+
+                restaurant = Restaurant.objects.get(id=rid)
+
+                if restaurant.rating != 0:
+                    restaurant.rating = (restaurant.rating + int(rating))/2
+                else:
+                    restaurant.rating += int(rating)
+
+                restaurant.save()
 
                 return Response({"message":"Created customer"}, status=status.HTTP_201_CREATED)
             else:
