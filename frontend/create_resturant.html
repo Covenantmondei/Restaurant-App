@@ -44,58 +44,88 @@
           <p>Add your restaurant to our directory</p>
         </div>
 
-            <form id="restaurantForm" action="http://127.0.0.1:8000/pyrestaurant/create" method="POST">
-                <div class="form-group">
-                    <label for="name">Restaurant Name <span class="required">*</span></label>
-                    <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        placeholder="Enter restaurant name"
-                        required
-                    >
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="country">Country <span class="required">*</span></label>
-                        <select id="country" name="country" required>
-                            <option value="">Select Country</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="state">State/Province <span class="required">*</span></label>
-                        <select id="state" name="state" required>
-                            <option value="">Select Country First</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="foodType">Type of Food <span class="required">*</span></label>
-                    <select id="foodType" name="type" required>
-                        <option value="">Select Food Type</option>
-                        <option value="Italian">Italian</option>
-                        <option value="Chinese">Chinese</option>
-                        <option value="Mexican">Mexican</option>
-                        <option value="Indian">Indian</option>
-                        <option value="Japanese">Japanese</option>
-                        <option value="American">American</option>
-                        <option value="French">French</option>
-                        <option value="Thai">Thai</option>
-                        <option value="Mediterranean">Mediterranean</option>
-                        <option value="Fast Food">Fast Food</option>
-                        <option value="Seafood">Seafood</option>
-                        <option value="Vegetarian">Vegetarian</option>
-                        <option value="BBQ">BBQ</option>
-                        <option value="Pizza">Pizza</option>
-                        <option value="Cafe">Cafe</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                
-                <input type="submit" class="create-btn" value="Create Restaurant">
-            </form>
+        <form
+          id="restaurantForm"
+          action="http://127.0.0.1:8000/pyrestaurant/create"
+          method="POST"
+        >
+          <div class="form-group">
+            <label for="name"
+              >Restaurant Name <span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter restaurant name"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="country"
+                >Country <span class="required">*</span></label
+              >
+              <select id="country" name="country" required>
+                <option value="">Select Country</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="state"
+                >State/Province <span class="required">*</span></label
+              >
+              <select id="state" name="state" required>
+                <option value="">Select Country First</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="foodType"
+              >Type of Food <span class="required">*</span></label
+            >
+            <select id="foodType" name="type" required>
+              <option value="">Select Food Type</option>
+              <option value="African">African</option>
+              <option value="American">American</option>
+              <option value="BBQ">BBQ</option>
+              <option value="Brazilian">Brazilian</option>
+              <option value="British">British</option>
+              <option value="Cafe">Cafe</option>
+              <option value="Caribbean">Caribbean</option>
+              <option value="Chinese">Chinese</option>
+              <option value="Ethiopian">Ethiopian</option>
+              <option value="Fast Food">Fast Food</option>
+              <option value="French">French</option>
+              <option value="Greek">Greek</option>
+              <option value="Indian">Indian</option>
+              <option value="Indonesian">Indonesian</option>
+              <option value="Italian">Italian</option>
+              <option value="Japanese">Japanese</option>
+              <option value="Korean">Korean</option>
+              <option value="Lebanese">Lebanese</option>
+              <option value="Mediterranean">Mediterranean</option>
+              <option value="Mexican">Mexican</option>
+              <option value="Middle Eastern">Middle Eastern</option>
+              <option value="Nigerian">Nigerian</option>
+              <option value="Pakistani">Pakistani</option>
+              <option value="Pizza">Pizza</option>
+              <option value="Seafood">Seafood</option>
+              <option value="Spanish">Spanish</option>
+              <option value="Street Food">Street Food</option>
+              <option value="Sushi">Sushi</option>
+              <option value="Swahili">Swahili</option>
+              <option value="Thai">Thai</option>
+              <option value="Turkish">Turkish</option>
+              <option value="Vegetarian">Vegetarian</option>
+              <option value="Vietnamese">Vietnamese</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <input type="submit" class="create-btn" value="Create Restaurant" />
+        </form>
 
         <div id="successMessage" class="success-message" style="display: none">
           <div class="success-content">
@@ -117,37 +147,605 @@
 
     <script src="nav-script.js"></script>
     <script>
-        // Countries and their states/provinces data
-        const countriesAndStates = {
-            "Afghanistan": ["Kabul", "Kandahar", "Herat", "Mazar-i-Sharif", "Kunduz"],
-            "Albania": ["Tirana", "Durrës", "Vlorë", "Shkodër", "Fier"],
-            "Algeria": ["Algiers", "Oran", "Constantine", "Annaba", "Blida"],
-            "Argentina": ["Buenos Aires", "Córdoba", "Santa Fe", "Mendoza", "Tucumán"],
-            "Australia": ["New South Wales", "Victoria", "Queensland", "Western Australia", "South Australia", "Tasmania", "Northern Territory", "Australian Capital Territory"],
-            "Austria": ["Vienna", "Styria", "Upper Austria", "Lower Austria", "Tyrol", "Salzburg", "Carinthia", "Vorarlberg", "Burgenland"],
-            "Bangladesh": ["Dhaka", "Chittagong", "Rajshahi", "Khulna", "Barisal", "Sylhet", "Rangpur", "Mymensingh"],
-            "Belgium": ["Brussels", "Antwerp", "East Flanders", "West Flanders", "Walloon Brabant", "Flemish Brabant", "Liège", "Namur", "Hainaut", "Limburg", "Luxembourg"],
-            "Brazil": ["São Paulo", "Rio de Janeiro", "Minas Gerais", "Bahia", "Paraná", "Rio Grande do Sul", "Pernambuco", "Ceará", "Pará", "Santa Catarina", "Goiás", "Maranhão", "Paraíba", "Espírito Santo", "Piauí", "Alagoas", "Rio Grande do Norte", "Mato Grosso", "Mato Grosso do Sul", "Distrito Federal", "Sergipe", "Rondônia", "Acre", "Amazonas", "Roraima", "Amapá", "Tocantins"],
-            "Canada": ["Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Northwest Territories", "Nova Scotia", "Nunavut", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Yukon"],
-            "Chile": ["Santiago Metropolitan", "Valparaíso", "Biobío", "Araucanía", "Los Lagos", "Maule", "O'Higgins", "Coquimbo", "Antofagasta", "Los Ríos", "Tarapacá", "Atacama", "Aysén", "Magallanes", "Arica y Parinacota", "Ñuble"],
-            "China": ["Beijing", "Shanghai", "Guangdong", "Shandong", "Henan", "Sichuan", "Jiangsu", "Hebei", "Hunan", "Anhui", "Hubei", "Zhejiang", "Guangxi", "Yunnan", "Jiangxi", "Liaoning", "Fujian", "Shaanxi", "Heilongjiang", "Shanxi", "Guizhou", "Chongqing", "Jilin", "Gansu", "Inner Mongolia", "Xinjiang", "Tianjin", "Qinghai", "Hainan", "Ningxia", "Tibet"],
-            "Colombia": ["Bogotá", "Antioquia", "Valle del Cauca", "Atlántico", "Santander", "Bolívar", "Cundinamarca", "Norte de Santander", "Córdoba", "Tolima", "Huila", "Nariño", "Meta", "Cesar", "Boyacá", "Sucre", "La Guajira", "Cauca", "Magdalena", "Caldas", "Risaralda", "Quindío", "Casanare", "Chocó", "Caquetá", "Putumayo", "Arauca", "San Andrés y Providencia", "Amazonas", "Guainía", "Guaviare", "Vaupés", "Vichada"],
-            "Egypt": ["Cairo", "Alexandria", "Giza", "Shubra El Kheima", "Port Said", "Suez", "Luxor", "Mansoura", "El Mahalla El Kubra", "Tanta", "Asyut", "Ismailia", "Fayyum", "Zagazig", "Aswan", "Damietta", "Damanhur", "Minya", "Beni Suef", "Hurghada", "Qena", "Sohag", "Shibin El Kom", "Banha", "Kafr el-Sheikh", "Arish", "Mallawi", "10th of Ramadan City", "Bilbays", "Marsa Matruh"],
-            "France": ["Île-de-France", "Auvergne-Rhône-Alpes", "Hauts-de-France", "Nouvelle-Aquitaine", "Occitanie", "Grand Est", "Provence-Alpes-Côte d'Azur", "Pays de la Loire", "Normandy", "Brittany", "Bourgogne-Franche-Comté", "Centre-Val de Loire", "Corsica"],
-            "Germany": ["North Rhine-Westphalia", "Bavaria", "Baden-Württemberg", "Lower Saxony", "Hesse", "Saxony", "Rhineland-Palatinate", "Berlin", "Schleswig-Holstein", "Brandenburg", "Saxony-Anhalt", "Thuringia", "Hamburg", "Mecklenburg-Vorpommern", "Saarland", "Bremen"],
-            "India": ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Delhi", "Jammu and Kashmir", "Ladakh", "Puducherry", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep", "Andaman and Nicobar Islands"],
-            "Indonesia": ["Jakarta", "West Java", "East Java", "Central Java", "North Sumatra", "Banten", "South Sulawesi", "Lampung", "Central Sulawesi", "West Sumatra", "South Sumatra", "East Kalimantan", "Riau", "Yogyakarta", "Aceh", "North Sulawesi", "South Kalimantan", "West Sulawesi", "Jambi", "West Nusa Tenggara", "Bengkulu", "Central Kalimantan", "Southeast Sulawesi", "Riau Islands", "Bangka Belitung", "Bali", "Gorontalo", "West Kalimantan", "Maluku", "East Nusa Tenggara", "Papua", "North Maluku", "West Papua"],
-            "Italy": ["Lombardy", "Lazio", "Campania", "Sicily", "Veneto", "Emilia-Romagna", "Piedmont", "Apulia", "Tuscany", "Calabria", "Sardinia", "Liguria", "Marche", "Abruzzo", "Friuli-Venezia Giulia", "Trentino-Alto Adige", "Umbria", "Basilicata", "Molise", "Aosta Valley"],
-            "Japan": ["Tokyo", "Kanagawa", "Osaka", "Aichi", "Saitama", "Chiba", "Hyogo", "Hokkaido", "Fukuoka", "Shizuoka", "Ibaraki", "Kyoto", "Hiroshima", "Sendai", "Niigata", "Kumamoto", "Kagoshima", "Okayama", "Fukushima", "Mie", "Gunma", "Tochigi", "Gifu", "Nagano", "Yamaguchi", "Ehime", "Aomori", "Okinawa", "Shiga", "Nara", "Miyagi", "Nagasaki", "Oita", "Yamagata", "Iwate", "Akita", "Miyazaki", "Toyama", "Yamanashi", "Saga", "Ishikawa", "Wakayama", "Fukui", "Kochi", "Shimane", "Tokushima", "Tottori"],
-            "Mexico": ["Mexico City", "State of Mexico", "Jalisco", "Veracruz", "Puebla", "Guanajuato", "Chiapas", "Nuevo León", "Michoacán", "Oaxaca", "Chihuahua", "Guerrero", "Tamaulipas", "Baja California", "Sinaloa", "Coahuila", "Hidalgo", "Sonora", "San Luis Potosí", "Tabasco", "Yucatán", "Querétaro", "Morelos", "Durango", "Zacatecas", "Quintana Roo", "Tlaxcala", "Aguascalientes", "Nayarit", "Campeche", "Baja California Sur", "Colima"],
-            "Nigeria": ["Lagos", "Kano", "Ibadan", "Kaduna", "Port Harcourt", "Benin City", "Maiduguri", "Zaria", "Aba", "Jos", "Ilorin", "Oyo", "Enugu", "Abeokuta", "Abuja", "Sokoto", "Onitsha", "Warri", "Okene", "Calabar", "Uyo", "Katsina", "Ado-Ekiti", "Ogbomoso", "Akure", "Osogbo", "Bauchi", "Katsina-Ala", "Gombe", "Ikeja", "Agege", "Minna", "Effon-Alaiye", "Ilesa", "Sapele", "Kano", "Kaduna", "Ibadan", "Lagos"],
-            "Russia": ["Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg", "Nizhny Novgorod", "Kazan", "Chelyabinsk", "Omsk", "Samara", "Rostov-on-Don", "Ufa", "Krasnoyarsk", "Perm", "Voronezh", "Volgograd", "Krasnodar", "Saratov", "Tyumen", "Tolyatti", "Izhevsk"],
-            "South Africa": ["Gauteng", "KwaZulu-Natal", "Western Cape", "Eastern Cape", "Limpopo", "Mpumalanga", "North West", "Free State", "Northern Cape"],
-            "Spain": ["Andalusia", "Catalonia", "Community of Madrid", "Valencian Community", "Galicia", "Castile and León", "Basque Country", "Canary Islands", "Castile-La Mancha", "Region of Murcia", "Aragon", "Extremadura", "Balearic Islands", "Asturias", "Navarre", "Cantabria", "La Rioja"],
-            "Turkey": ["Istanbul", "Ankara", "İzmir", "Bursa", "Antalya", "Adana", "Konya", "Şanlıurfa", "Gaziantep", "Kayseri", "Mersin", "Eskişehir", "Diyarbakır", "Samsun", "Denizli", "Adapazarı", "Malatya", "Kahramanmaraş", "Erzurum", "Van"],
-            "United Kingdom": ["England", "Scotland", "Wales", "Northern Ireland"],
-            "United States": ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "District of Columbia"]
-        };
+      // Countries and their states/provinces data
+      const countriesAndStates = {
+        Afghanistan: ["Kabul", "Kandahar", "Herat", "Mazar-i-Sharif", "Kunduz"],
+        Albania: ["Tirana", "Durrës", "Vlorë", "Shkodër", "Fier"],
+        Algeria: ["Algiers", "Oran", "Constantine", "Annaba", "Blida"],
+        Argentina: [
+          "Buenos Aires",
+          "Córdoba",
+          "Santa Fe",
+          "Mendoza",
+          "Tucumán",
+        ],
+        Australia: [
+          "New South Wales",
+          "Victoria",
+          "Queensland",
+          "Western Australia",
+          "South Australia",
+          "Tasmania",
+          "Northern Territory",
+          "Australian Capital Territory",
+        ],
+        Austria: [
+          "Vienna",
+          "Styria",
+          "Upper Austria",
+          "Lower Austria",
+          "Tyrol",
+          "Salzburg",
+          "Carinthia",
+          "Vorarlberg",
+          "Burgenland",
+        ],
+        Bangladesh: [
+          "Dhaka",
+          "Chittagong",
+          "Rajshahi",
+          "Khulna",
+          "Barisal",
+          "Sylhet",
+          "Rangpur",
+          "Mymensingh",
+        ],
+        Belgium: [
+          "Brussels",
+          "Antwerp",
+          "East Flanders",
+          "West Flanders",
+          "Walloon Brabant",
+          "Flemish Brabant",
+          "Liège",
+          "Namur",
+          "Hainaut",
+          "Limburg",
+          "Luxembourg",
+        ],
+        Brazil: [
+          "São Paulo",
+          "Rio de Janeiro",
+          "Minas Gerais",
+          "Bahia",
+          "Paraná",
+          "Rio Grande do Sul",
+          "Pernambuco",
+          "Ceará",
+          "Pará",
+          "Santa Catarina",
+          "Goiás",
+          "Maranhão",
+          "Paraíba",
+          "Espírito Santo",
+          "Piauí",
+          "Alagoas",
+          "Rio Grande do Norte",
+          "Mato Grosso",
+          "Mato Grosso do Sul",
+          "Distrito Federal",
+          "Sergipe",
+          "Rondônia",
+          "Acre",
+          "Amazonas",
+          "Roraima",
+          "Amapá",
+          "Tocantins",
+        ],
+        Canada: [
+          "Alberta",
+          "British Columbia",
+          "Manitoba",
+          "New Brunswick",
+          "Newfoundland and Labrador",
+          "Northwest Territories",
+          "Nova Scotia",
+          "Nunavut",
+          "Ontario",
+          "Prince Edward Island",
+          "Quebec",
+          "Saskatchewan",
+          "Yukon",
+        ],
+        Chile: [
+          "Santiago Metropolitan",
+          "Valparaíso",
+          "Biobío",
+          "Araucanía",
+          "Los Lagos",
+          "Maule",
+          "O'Higgins",
+          "Coquimbo",
+          "Antofagasta",
+          "Los Ríos",
+          "Tarapacá",
+          "Atacama",
+          "Aysén",
+          "Magallanes",
+          "Arica y Parinacota",
+          "Ñuble",
+        ],
+        China: [
+          "Beijing",
+          "Shanghai",
+          "Guangdong",
+          "Shandong",
+          "Henan",
+          "Sichuan",
+          "Jiangsu",
+          "Hebei",
+          "Hunan",
+          "Anhui",
+          "Hubei",
+          "Zhejiang",
+          "Guangxi",
+          "Yunnan",
+          "Jiangxi",
+          "Liaoning",
+          "Fujian",
+          "Shaanxi",
+          "Heilongjiang",
+          "Shanxi",
+          "Guizhou",
+          "Chongqing",
+          "Jilin",
+          "Gansu",
+          "Inner Mongolia",
+          "Xinjiang",
+          "Tianjin",
+          "Qinghai",
+          "Hainan",
+          "Ningxia",
+          "Tibet",
+        ],
+        Colombia: [
+          "Bogotá",
+          "Antioquia",
+          "Valle del Cauca",
+          "Atlántico",
+          "Santander",
+          "Bolívar",
+          "Cundinamarca",
+          "Norte de Santander",
+          "Córdoba",
+          "Tolima",
+          "Huila",
+          "Nariño",
+          "Meta",
+          "Cesar",
+          "Boyacá",
+          "Sucre",
+          "La Guajira",
+          "Cauca",
+          "Magdalena",
+          "Caldas",
+          "Risaralda",
+          "Quindío",
+          "Casanare",
+          "Chocó",
+          "Caquetá",
+          "Putumayo",
+          "Arauca",
+          "San Andrés y Providencia",
+          "Amazonas",
+          "Guainía",
+          "Guaviare",
+          "Vaupés",
+          "Vichada",
+        ],
+        Egypt: [
+          "Cairo",
+          "Alexandria",
+          "Giza",
+          "Shubra El Kheima",
+          "Port Said",
+          "Suez",
+          "Luxor",
+          "Mansoura",
+          "El Mahalla El Kubra",
+          "Tanta",
+          "Asyut",
+          "Ismailia",
+          "Fayyum",
+          "Zagazig",
+          "Aswan",
+          "Damietta",
+          "Damanhur",
+          "Minya",
+          "Beni Suef",
+          "Hurghada",
+          "Qena",
+          "Sohag",
+          "Shibin El Kom",
+          "Banha",
+          "Kafr el-Sheikh",
+          "Arish",
+          "Mallawi",
+          "10th of Ramadan City",
+          "Bilbays",
+          "Marsa Matruh",
+        ],
+        France: [
+          "Île-de-France",
+          "Auvergne-Rhône-Alpes",
+          "Hauts-de-France",
+          "Nouvelle-Aquitaine",
+          "Occitanie",
+          "Grand Est",
+          "Provence-Alpes-Côte d'Azur",
+          "Pays de la Loire",
+          "Normandy",
+          "Brittany",
+          "Bourgogne-Franche-Comté",
+          "Centre-Val de Loire",
+          "Corsica",
+        ],
+        Germany: [
+          "North Rhine-Westphalia",
+          "Bavaria",
+          "Baden-Württemberg",
+          "Lower Saxony",
+          "Hesse",
+          "Saxony",
+          "Rhineland-Palatinate",
+          "Berlin",
+          "Schleswig-Holstein",
+          "Brandenburg",
+          "Saxony-Anhalt",
+          "Thuringia",
+          "Hamburg",
+          "Mecklenburg-Vorpommern",
+          "Saarland",
+          "Bremen",
+        ],
+        India: [
+          "Andhra Pradesh",
+          "Arunachal Pradesh",
+          "Assam",
+          "Bihar",
+          "Chhattisgarh",
+          "Goa",
+          "Gujarat",
+          "Haryana",
+          "Himachal Pradesh",
+          "Jharkhand",
+          "Karnataka",
+          "Kerala",
+          "Madhya Pradesh",
+          "Maharashtra",
+          "Manipur",
+          "Meghalaya",
+          "Mizoram",
+          "Nagaland",
+          "Odisha",
+          "Punjab",
+          "Rajasthan",
+          "Sikkim",
+          "Tamil Nadu",
+          "Telangana",
+          "Tripura",
+          "Uttar Pradesh",
+          "Uttarakhand",
+          "West Bengal",
+          "Delhi",
+          "Jammu and Kashmir",
+          "Ladakh",
+          "Puducherry",
+          "Chandigarh",
+          "Dadra and Nagar Haveli and Daman and Diu",
+          "Lakshadweep",
+          "Andaman and Nicobar Islands",
+        ],
+        Indonesia: [
+          "Jakarta",
+          "West Java",
+          "East Java",
+          "Central Java",
+          "North Sumatra",
+          "Banten",
+          "South Sulawesi",
+          "Lampung",
+          "Central Sulawesi",
+          "West Sumatra",
+          "South Sumatra",
+          "East Kalimantan",
+          "Riau",
+          "Yogyakarta",
+          "Aceh",
+          "North Sulawesi",
+          "South Kalimantan",
+          "West Sulawesi",
+          "Jambi",
+          "West Nusa Tenggara",
+          "Bengkulu",
+          "Central Kalimantan",
+          "Southeast Sulawesi",
+          "Riau Islands",
+          "Bangka Belitung",
+          "Bali",
+          "Gorontalo",
+          "West Kalimantan",
+          "Maluku",
+          "East Nusa Tenggara",
+          "Papua",
+          "North Maluku",
+          "West Papua",
+        ],
+        Italy: [
+          "Lombardy",
+          "Lazio",
+          "Campania",
+          "Sicily",
+          "Veneto",
+          "Emilia-Romagna",
+          "Piedmont",
+          "Apulia",
+          "Tuscany",
+          "Calabria",
+          "Sardinia",
+          "Liguria",
+          "Marche",
+          "Abruzzo",
+          "Friuli-Venezia Giulia",
+          "Trentino-Alto Adige",
+          "Umbria",
+          "Basilicata",
+          "Molise",
+          "Aosta Valley",
+        ],
+        Japan: [
+          "Tokyo",
+          "Kanagawa",
+          "Osaka",
+          "Aichi",
+          "Saitama",
+          "Chiba",
+          "Hyogo",
+          "Hokkaido",
+          "Fukuoka",
+          "Shizuoka",
+          "Ibaraki",
+          "Kyoto",
+          "Hiroshima",
+          "Sendai",
+          "Niigata",
+          "Kumamoto",
+          "Kagoshima",
+          "Okayama",
+          "Fukushima",
+          "Mie",
+          "Gunma",
+          "Tochigi",
+          "Gifu",
+          "Nagano",
+          "Yamaguchi",
+          "Ehime",
+          "Aomori",
+          "Okinawa",
+          "Shiga",
+          "Nara",
+          "Miyagi",
+          "Nagasaki",
+          "Oita",
+          "Yamagata",
+          "Iwate",
+          "Akita",
+          "Miyazaki",
+          "Toyama",
+          "Yamanashi",
+          "Saga",
+          "Ishikawa",
+          "Wakayama",
+          "Fukui",
+          "Kochi",
+          "Shimane",
+          "Tokushima",
+          "Tottori",
+        ],
+        Mexico: [
+          "Mexico City",
+          "State of Mexico",
+          "Jalisco",
+          "Veracruz",
+          "Puebla",
+          "Guanajuato",
+          "Chiapas",
+          "Nuevo León",
+          "Michoacán",
+          "Oaxaca",
+          "Chihuahua",
+          "Guerrero",
+          "Tamaulipas",
+          "Baja California",
+          "Sinaloa",
+          "Coahuila",
+          "Hidalgo",
+          "Sonora",
+          "San Luis Potosí",
+          "Tabasco",
+          "Yucatán",
+          "Querétaro",
+          "Morelos",
+          "Durango",
+          "Zacatecas",
+          "Quintana Roo",
+          "Tlaxcala",
+          "Aguascalientes",
+          "Nayarit",
+          "Campeche",
+          "Baja California Sur",
+          "Colima",
+        ],
+        Nigeria: [
+          "Lagos",
+          "Kano",
+          "Ibadan",
+          "Kaduna",
+          "Port Harcourt",
+          "Benin City",
+          "Maiduguri",
+          "Zaria",
+          "Aba",
+          "Jos",
+          "Ilorin",
+          "Oyo",
+          "Enugu",
+          "Abeokuta",
+          "Abuja",
+          "Sokoto",
+          "Onitsha",
+          "Warri",
+          "Okene",
+          "Calabar",
+          "Uyo",
+          "Katsina",
+          "Ado-Ekiti",
+          "Ogbomoso",
+          "Akure",
+          "Osogbo",
+          "Bauchi",
+          "Katsina-Ala",
+          "Gombe",
+          "Ikeja",
+          "Agege",
+          "Minna",
+          "Effon-Alaiye",
+          "Ilesa",
+          "Sapele",
+          "Kano",
+          "Kaduna",
+          "Ibadan",
+          "Lagos",
+        ],
+        Russia: [
+          "Moscow",
+          "Saint Petersburg",
+          "Novosibirsk",
+          "Yekaterinburg",
+          "Nizhny Novgorod",
+          "Kazan",
+          "Chelyabinsk",
+          "Omsk",
+          "Samara",
+          "Rostov-on-Don",
+          "Ufa",
+          "Krasnoyarsk",
+          "Perm",
+          "Voronezh",
+          "Volgograd",
+          "Krasnodar",
+          "Saratov",
+          "Tyumen",
+          "Tolyatti",
+          "Izhevsk",
+        ],
+        "South Africa": [
+          "Gauteng",
+          "KwaZulu-Natal",
+          "Western Cape",
+          "Eastern Cape",
+          "Limpopo",
+          "Mpumalanga",
+          "North West",
+          "Free State",
+          "Northern Cape",
+        ],
+        Spain: [
+          "Andalusia",
+          "Catalonia",
+          "Community of Madrid",
+          "Valencian Community",
+          "Galicia",
+          "Castile and León",
+          "Basque Country",
+          "Canary Islands",
+          "Castile-La Mancha",
+          "Region of Murcia",
+          "Aragon",
+          "Extremadura",
+          "Balearic Islands",
+          "Asturias",
+          "Navarre",
+          "Cantabria",
+          "La Rioja",
+        ],
+        Turkey: [
+          "Istanbul",
+          "Ankara",
+          "İzmir",
+          "Bursa",
+          "Antalya",
+          "Adana",
+          "Konya",
+          "Şanlıurfa",
+          "Gaziantep",
+          "Kayseri",
+          "Mersin",
+          "Eskişehir",
+          "Diyarbakır",
+          "Samsun",
+          "Denizli",
+          "Adapazarı",
+          "Malatya",
+          "Kahramanmaraş",
+          "Erzurum",
+          "Van",
+        ],
+        "United Kingdom": ["England", "Scotland", "Wales", "Northern Ireland"],
+        "United States": [
+          "Alabama",
+          "Alaska",
+          "Arizona",
+          "Arkansas",
+          "California",
+          "Colorado",
+          "Connecticut",
+          "Delaware",
+          "Florida",
+          "Georgia",
+          "Hawaii",
+          "Idaho",
+          "Illinois",
+          "Indiana",
+          "Iowa",
+          "Kansas",
+          "Kentucky",
+          "Louisiana",
+          "Maine",
+          "Maryland",
+          "Massachusetts",
+          "Michigan",
+          "Minnesota",
+          "Mississippi",
+          "Missouri",
+          "Montana",
+          "Nebraska",
+          "Nevada",
+          "New Hampshire",
+          "New Jersey",
+          "New Mexico",
+          "New York",
+          "North Carolina",
+          "North Dakota",
+          "Ohio",
+          "Oklahoma",
+          "Oregon",
+          "Pennsylvania",
+          "Rhode Island",
+          "South Carolina",
+          "South Dakota",
+          "Tennessee",
+          "Texas",
+          "Utah",
+          "Vermont",
+          "Virginia",
+          "Washington",
+          "West Virginia",
+          "Wisconsin",
+          "Wyoming",
+          "District of Columbia",
+        ],
+      };
 
       // Populate countries dropdown
       function populateCountries() {
