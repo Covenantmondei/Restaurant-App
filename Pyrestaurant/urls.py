@@ -10,5 +10,5 @@ urlpatterns = [
     path("food/get", GetFood.as_view(), name="getFood"),
     path("customers/", TopCustomers.as_view(), name="topcustomers"),
     path("reviews/", TopReviews.as_view(), name="topreviews"),
-    path("getall", Restaurants.as_view(), name="restaurant")
+    path("getall", Restaurantsall.as_view(), name="restaurant")
 ]

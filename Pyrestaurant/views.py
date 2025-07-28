@@ -64,7 +64,7 @@ class GetAllRestaurants(APIView):
         return Response(data)
     
 
-class Restaurants(APIView):
+class Restaurantsall(APIView):
     def get(self, request):
         restaurants = Restaurant.objects.order_by('-created_at')
         rating = Restaurant.objects.all()
