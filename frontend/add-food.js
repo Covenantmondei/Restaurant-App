@@ -1,4 +1,6 @@
-document.getElementById('foodForm').addEventListener('submit', async function(e) {
+document
+  .getElementById("foodForm")
+  .addEventListener("submit", async function (e) {
     e.preventDefault();
 
     // Collect form data
@@ -6,60 +8,64 @@ document.getElementById('foodForm').addEventListener('submit', async function(e)
     const formData = new FormData(form);
     const data = {};
     formData.forEach((value, key) => {
-        data[key] = value;
+      data[key] = value;
     });
 
     try {
-        const response = await fetch('http://127.0.0.1:8000/pyrestaurant/food/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-            // Hide the form and show success message
-            form.style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
-        } else {
-            const errorData = await response.json();
-            alert('Error: ' + (errorData.Error || 'Failed to add food.'));
+      const response = await fetch(
+        "https://restaurant-app-6rtf.onrender.com/pyrestaurant/food/add",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
         }
+      );
+
+      if (response.ok) {
+        // Hide the form and show success message
+        form.style.display = "none";
+        document.getElementById("successMessage").style.display = "block";
+      } else {
+        const errorData = await response.json();
+        alert("Error: " + (errorData.Error || "Failed to add food."));
+      }
     } catch (error) {
-        alert('Network error: ' + error.message);
+      alert("Network error: " + error.message);
     }
-});
+  });
 
 function resetForm() {
-    // Show the form and hide success message
-    document.getElementById('foodForm').style.display = 'block';
-    document.getElementById('successMessage').style.display = 'none';
+  // Show the form and hide success message
+  document.getElementById("foodForm").style.display = "block";
+  document.getElementById("successMessage").style.display = "none";
 
-    // Reset the form
-    document.getElementById('foodForm').reset();
+  // Reset the form
+  document.getElementById("foodForm").reset();
 }
 
-
 async function populateRestaurants() {
-    const select = document.getElementById('restaurant');
-    try {
-        const response = await fetch('http://127.0.0.1:8000/pyrestaurant/all');
-        if (response.ok) {
-            const data = await response.json();
-            data.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item.restaurant.id;
-                option.textContent = item.restaurant.name;
-                select.appendChild(option);
-            });
-        } else {
-            select.innerHTML = '<option value="">Failed to load restaurants</option>';
-        }
-    } catch (error) {
-        select.innerHTML = '<option value="">Error loading restaurants</option>';
+  const select = document.getElementById("restaurant");
+  try {
+    const response = await fetch(
+      "https://restaurant-app-6rtf.onrender.com/pyrestaurant/getall"
+    );
+    if (response.ok) {
+      const data = await response.json();
+      data.forEach((item) => {
+        const option = document.createElement("option");
+        option.value = item.restaurant.id;
+        option.textContent = item.restaurant.name;
+        select.appendChild(option);
+      });
+    } else {
+      select.innerHTML = '<option value="">Failed to load restaurants</option>';
     }
+  } catch (error) {
+    select.innerHTML = '<option value="">Error loading restaurants</option>';
+  }
 }
 
 // Call on page load
-window.addEventListener('DOMContentLoaded', populateRestaurants);
+window.addEventListener("DOMContentLoaded", populateRestaurants);

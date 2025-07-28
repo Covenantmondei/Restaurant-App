@@ -64,6 +64,29 @@ class GetAllRestaurants(APIView):
         return Response(data)
     
 
+class Restaurants(APIView):
+    def get(self, request):
+        restaurants = Restaurant.objects.order_by('-created_at')
+        rating = Restaurant.objects.all()
+
+        for i in rating:
+            if i.rating > 5:
+                i.rating = 5
+                i.save()
+
+        
+        data = []
+        for restaurant in restaurants:
+            restaurant_data = RestaurantSerializer(restaurant).data
+            foods = Food.objects.filter(restaurant=restaurant)
+            foods_data = FoodSerializer(foods, many=True).data
+            data.append({
+                "restaurant": restaurant_data,
+                "foods": foods_data
+            })
+        return Response(data)
+    
+
 
 class AddFood(APIView):
 
@@ -161,3 +184,8 @@ class TopReviews(APIView):
         reviews = Review.objects.all()[:5]
         serializers = ReviewSerializer(reviews, many=True)
         return Response(serializers.data)
+    
+
+class Home(APIView):
+    def get(self, request):
+        return Response({"message":"Hello world"})

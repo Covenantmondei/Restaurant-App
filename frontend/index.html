@@ -1,170 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Restaurant Search</title>
-    <link rel="stylesheet" href="buy-style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="buy-style.css" />
+  </head>
+  <body>
     <!-- Navigation Header -->
     <nav class="nav-header">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2>🍽️ FoodHub</h2>
-            </div>
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item">
-                    <a href="create_resturant.html" class="nav-link">
-                        <span class="nav-icon">🏪</span>
-                        <span>Create Restaurant</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="add-food.html" class="nav-link">
-                        <span class="nav-icon">🍕</span>
-                        <span>Add Food</span>
-                    </a>
-                </li>
-                <!-- Current page link is hidden -->
-            </ul>
-            <div class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+      <div class="nav-container">
+        <div class="nav-logo">
+          <h2>🍽️ FoodHub</h2>
         </div>
+        <ul class="nav-menu" id="navMenu">
+          <li class="nav-item">
+            <a href="create_resturant.html" class="nav-link">
+              <span class="nav-icon">🏪</span>
+              <span>Create Restaurant</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="add-food.html" class="nav-link">
+              <span class="nav-icon">🍕</span>
+              <span>Add Food</span>
+            </a>
+          </li>
+          <!-- Current page link is hidden -->
+        </ul>
+        <div class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
     </nav>
 
     <!-- Main Content Wrapper -->
     <div class="main-wrapper">
-        <div class="header">
-            <h1>Restaurant Finder</h1>
-            <p>Discover amazing restaurants and delicious food</p>
-        </div>
+      <div class="header">
+        <h1>Restaurant Finder</h1>
+        <p>Discover amazing restaurants and delicious food</p>
+      </div>
 
-        <div class="search-container">
-            <input type="text" class="search-bar" id="searchInput" placeholder="Search for restaurants...">
-            <button class="search-btn" id="searchBtn">🔍</button>
-        </div>
+      <div class="search-container">
+        <input
+          type="text"
+          class="search-bar"
+          id="searchInput"
+          placeholder="Search for restaurants..."
+        />
+        <button class="search-btn" id="searchBtn">🔍</button>
+      </div>
 
-        <div class="main-content">
-            <div class="restaurant-section">
-                <div id="restaurantResults">
-                    
-                </div>
-            </div>
-            <div class="sidebar">
-                <div class="sidebar-section" >
-                    <h3 class="sidebar-title">Top Customers</h3>
-                    <div id="topCustomers">
-                        
-                    </div>
-                </div>
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title">Reviews</h3>
-                    <div id="customerReviews">
-                        
-                    </div>
-                </div>
-            </div>
+      <div class="main-content">
+        <div class="restaurant-section">
+          <div id="restaurantResults"></div>
         </div>
+        <div class="sidebar">
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Top Customers</h3>
+            <div id="topCustomers"></div>
+          </div>
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Reviews</h3>
+            <div id="customerReviews"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Buy Food Form Overlay -->
     <div class="form-overlay" id="formOverlay">
-        <div class="buy-food-form">
-            <button class="close-btn" onclick="closeBuyFoodForm()">&times;</button>
-            
-            <div class="form-header">
-                <h2>Buy Food</h2>
-                <p>Complete your order details</p>
-            </div>
+      <div class="buy-food-form">
+        <button class="close-btn" onclick="closeBuyFoodForm()">&times;</button>
 
-            <form id="buyFoodForm" action="http://127.0.0.1:8000/pyrestaurant/food/buy" method="POST">
-                <div class="form-group">
-                    <label for="restaurantName">Restaurant Name <span class="required">*</span></label>
-                    <input 
-                        type="text" 
-                        id="restaurantName" 
-                        name="restaurantName" 
-                        placeholder="Restaurant name"
-                        readonly
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="customerName">Customer Name <span class="required">*</span></label>
-                    <input 
-                        type="text" 
-                        id="customerName" 
-                        name="customerName" 
-                        placeholder="Enter your full name"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="foodName">Food Name <span class="required">*</span></label>
-                    <select id="foodName" name="foodName" required>
-                        <option value="">Select your favorite dish</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="rating">Rating <span class="required">*</span></label>
-                    <div class="rating-group">
-                        <div class="star-rating" id="starRating">
-                            <span class="star" data-rating="1">★</span>
-                            <span class="star" data-rating="2">★</span>
-                            <span class="star" data-rating="3">★</span>
-                            <span class="star" data-rating="4">★</span>
-                            <span class="star" data-rating="5">★</span>
-                        </div>
-                        <span class="rating-text" id="ratingText">Select rating</span>
-                    </div>
-                    <input type="hidden" id="rating" name="rating" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="review">Review <span class="required">*</span></label>
-                    <textarea 
-                        id="review" 
-                        name="review" 
-                        placeholder="Share your experience and thoughts about the food..."
-                        required
-                    ></textarea>
-                </div>
-
-                <div class="form-buttons">
-                    <button type="button" class="form-btn cancel-btn" onclick="closeBuyFoodForm()">Cancel</button>
-                    <input type="submit" class="form-btn buy-btn" value="Buy Food">
-                </div>
-            </form>
-
-            <!-- Loading thingy-->
-            <div id="loadingSpinner" class="loading-spinner" style="display: none;">
-                <div class="spinner"></div>
-                <p>Placing your order...</p>
-            </div>
-
-            <!-- Success Message -->
-            <div id="successMessage" class="success-message" style="display: none;">
-                <div class="success-content">
-                    <div class="success-icon">🍽️</div>
-                    <h2>Enjoy Your Meal!</h2>
-                    <p>Your food order has been placed successfully. Bon appétit!</p>
-                    <div class="button-group">
-                        <button onclick="resetBuyForm()" class="reset-btn">Order Again</button>
-                        <button onclick="goToSearch()" class="secondary-btn">Browse More</button>
-                    </div>
-                </div>
-            </div>
+        <div class="form-header">
+          <h2>Buy Food</h2>
+          <p>Complete your order details</p>
         </div>
+
+        <form
+          id="buyFoodForm"
+          action="https://restaurant-app-6rtf.onrender.com/pyrestaurant/food/buy"
+          method="POST"
+        >
+          <div class="form-group">
+            <label for="restaurantName"
+              >Restaurant Name <span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="restaurantName"
+              name="restaurantName"
+              placeholder="Restaurant name"
+              readonly
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="customerName"
+              >Customer Name <span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="customerName"
+              name="customerName"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="foodName"
+              >Food Name <span class="required">*</span></label
+            >
+            <select id="foodName" name="foodName" required>
+              <option value="">Select your favorite dish</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="rating">Rating <span class="required">*</span></label>
+            <div class="rating-group">
+              <div class="star-rating" id="starRating">
+                <span class="star" data-rating="1">★</span>
+                <span class="star" data-rating="2">★</span>
+                <span class="star" data-rating="3">★</span>
+                <span class="star" data-rating="4">★</span>
+                <span class="star" data-rating="5">★</span>
+              </div>
+              <span class="rating-text" id="ratingText">Select rating</span>
+            </div>
+            <input type="hidden" id="rating" name="rating" required />
+          </div>
+
+          <div class="form-group">
+            <label for="review">Review <span class="required">*</span></label>
+            <textarea
+              id="review"
+              name="review"
+              placeholder="Share your experience and thoughts about the food..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-buttons">
+            <button
+              type="button"
+              class="form-btn cancel-btn"
+              onclick="closeBuyFoodForm()"
+            >
+              Cancel
+            </button>
+            <input type="submit" class="form-btn buy-btn" value="Buy Food" />
+          </div>
+        </form>
+
+        <!-- Loading thingy-->
+        <div id="loadingSpinner" class="loading-spinner" style="display: none">
+          <div class="spinner"></div>
+          <p>Placing your order...</p>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message" style="display: none">
+          <div class="success-content">
+            <div class="success-icon">🍽️</div>
+            <h2>Enjoy Your Meal!</h2>
+            <p>Your food order has been placed successfully. Bon appétit!</p>
+            <div class="button-group">
+              <button onclick="resetBuyForm()" class="reset-btn">
+                Order Again
+              </button>
+              <button onclick="goToSearch()" class="secondary-btn">
+                Browse More
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="nav-script.js"></script>
     <script src="buy-food.js"></script>
-</body>
+  </body>
 </html>
