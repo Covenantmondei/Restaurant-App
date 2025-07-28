@@ -1,245 +1,831 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Restaurant</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <!-- Navigation Header -->
     <nav class="nav-header">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2>🍽️ FoodHub</h2>
-            </div>
-            <ul class="nav-menu" id="navMenu">
-                <!-- Current page link is hidden -->
-                <li class="nav-item">
-                    <a href="add-food.html" class="nav-link">
-                        <span class="nav-icon">🍕</span>
-                        <span>Add Food</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link">
-                        <span class="nav-icon">🔍</span>
-                        <span>Search Food</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+      <div class="nav-container">
+        <div class="nav-logo">
+          <h2>🍽️ FoodHub</h2>
         </div>
+        <ul class="nav-menu" id="navMenu">
+          <!-- Current page link is hidden -->
+          <li class="nav-item">
+            <a href="add-food.html" class="nav-link">
+              <span class="nav-icon">🍕</span>
+              <span>Add Food</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">
+              <span class="nav-icon">🔍</span>
+              <span>Search Food</span>
+            </a>
+          </li>
+        </ul>
+        <div class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
     </nav>
 
     <!-- Main Content Wrapper -->
     <div class="main-wrapper">
-        <div class="container">
-            <div class="header">
-                <h1>Create Restaurant</h1>
-                <p>Add your restaurant to our directory</p>
-            </div>
-
-            <form id="restaurantForm" action="http://127.0.0.1:8000/pyrestaurant/create" method="POST">
-                <div class="form-group">
-                    <label for="name">Restaurant Name <span class="required">*</span></label>
-                    <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        placeholder="Enter restaurant name"
-                        required
-                    >
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="country">Country <span class="required">*</span></label>
-                        <select id="country" name="country" required>
-                            <option value="">Select Country</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="state">State/Province <span class="required">*</span></label>
-                        <select id="state" name="state" required>
-                            <option value="">Select Country First</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="foodType">Type of Food <span class="required">*</span></label>
-                    <select id="foodType" name="type" required>
-                        <option value="">Select Food Type</option>
-                        <option value="Italian">Italian</option>
-                        <option value="Chinese">Chinese</option>
-                        <option value="Mexican">Mexican</option>
-                        <option value="Indian">Indian</option>
-                        <option value="Japanese">Japanese</option>
-                        <option value="American">American</option>
-                        <option value="French">French</option>
-                        <option value="Thai">Thai</option>
-                        <option value="Mediterranean">Mediterranean</option>
-                        <option value="Fast Food">Fast Food</option>
-                        <option value="Seafood">Seafood</option>
-                        <option value="Vegetarian">Vegetarian</option>
-                        <option value="BBQ">BBQ</option>
-                        <option value="Pizza">Pizza</option>
-                        <option value="Cafe">Cafe</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                
-                <input type="submit" class="create-btn" value="Create Restaurant">
-            </form>
-
-            <div id="successMessage" class="success-message" style="display: none;">
-                <div class="success-content">
-                    <div class="success-icon">✓</div>
-                    <h2>Restaurant Created Successfully!</h2>
-                    <p>Your restaurant has been added to our directory.</p>
-                    <div class="button-group">
-                        <button onclick="resetForm()" class="reset-btn">Create Another Restaurant</button>
-                        <button onclick="goToAddFood()" class="secondary-btn">Add Food</button>
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="header">
+          <h1>Create Restaurant</h1>
+          <p>Add your restaurant to our directory</p>
         </div>
+
+        <form
+          id="restaurantForm"
+          action="http://127.0.0.1:8000/pyrestaurant/create"
+          method="POST"
+        >
+          <div class="form-group">
+            <label for="name"
+              >Restaurant Name <span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter restaurant name"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="country"
+                >Country <span class="required">*</span></label
+              >
+              <select id="country" name="country" required>
+                <option value="">Select Country</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="state"
+                >State/Province <span class="required">*</span></label
+              >
+              <select id="state" name="state" required>
+                <option value="">Select Country First</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="foodType"
+              >Type of Food <span class="required">*</span></label
+            >
+            <select id="foodType" name="type" required>
+              <option value="">Select Food Type</option>
+              <option value="Italian">Italian</option>
+              <option value="Chinese">Chinese</option>
+              <option value="Mexican">Mexican</option>
+              <option value="Indian">Indian</option>
+              <option value="Japanese">Japanese</option>
+              <option value="American">American</option>
+              <option value="French">French</option>
+              <option value="Thai">Thai</option>
+              <option value="Mediterranean">Mediterranean</option>
+              <option value="Fast Food">Fast Food</option>
+              <option value="Seafood">Seafood</option>
+              <option value="Vegetarian">Vegetarian</option>
+              <option value="BBQ">BBQ</option>
+              <option value="Pizza">Pizza</option>
+              <option value="Cafe">Cafe</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <input type="submit" class="create-btn" value="Create Restaurant" />
+        </form>
+
+        <div id="successMessage" class="success-message" style="display: none">
+          <div class="success-content">
+            <div class="success-icon">✓</div>
+            <h2>Restaurant Created Successfully!</h2>
+            <p>Your restaurant has been added to our directory.</p>
+            <div class="button-group">
+              <button onclick="resetForm()" class="reset-btn">
+                Create Another Restaurant
+              </button>
+              <button onclick="goToAddFood()" class="secondary-btn">
+                Add Food
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="nav-script.js"></script>
     <script>
-        // Countries and their states/provinces data
-        const countriesAndStates = {
-            "Afghanistan": ["Kabul", "Kandahar", "Herat", "Mazar-i-Sharif", "Kunduz"],
-            "Albania": ["Tirana", "Durrës", "Vlorë", "Shkodër", "Fier"],
-            "Algeria": ["Algiers", "Oran", "Constantine", "Annaba", "Blida"],
-            "Argentina": ["Buenos Aires", "Córdoba", "Santa Fe", "Mendoza", "Tucumán"],
-            "Australia": ["New South Wales", "Victoria", "Queensland", "Western Australia", "South Australia", "Tasmania", "Northern Territory", "Australian Capital Territory"],
-            "Austria": ["Vienna", "Styria", "Upper Austria", "Lower Austria", "Tyrol", "Salzburg", "Carinthia", "Vorarlberg", "Burgenland"],
-            "Bangladesh": ["Dhaka", "Chittagong", "Rajshahi", "Khulna", "Barisal", "Sylhet", "Rangpur", "Mymensingh"],
-            "Belgium": ["Brussels", "Antwerp", "East Flanders", "West Flanders", "Walloon Brabant", "Flemish Brabant", "Liège", "Namur", "Hainaut", "Limburg", "Luxembourg"],
-            "Brazil": ["São Paulo", "Rio de Janeiro", "Minas Gerais", "Bahia", "Paraná", "Rio Grande do Sul", "Pernambuco", "Ceará", "Pará", "Santa Catarina", "Goiás", "Maranhão", "Paraíba", "Espírito Santo", "Piauí", "Alagoas", "Rio Grande do Norte", "Mato Grosso", "Mato Grosso do Sul", "Distrito Federal", "Sergipe", "Rondônia", "Acre", "Amazonas", "Roraima", "Amapá", "Tocantins"],
-            "Canada": ["Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Northwest Territories", "Nova Scotia", "Nunavut", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Yukon"],
-            "Chile": ["Santiago Metropolitan", "Valparaíso", "Biobío", "Araucanía", "Los Lagos", "Maule", "O'Higgins", "Coquimbo", "Antofagasta", "Los Ríos", "Tarapacá", "Atacama", "Aysén", "Magallanes", "Arica y Parinacota", "Ñuble"],
-            "China": ["Beijing", "Shanghai", "Guangdong", "Shandong", "Henan", "Sichuan", "Jiangsu", "Hebei", "Hunan", "Anhui", "Hubei", "Zhejiang", "Guangxi", "Yunnan", "Jiangxi", "Liaoning", "Fujian", "Shaanxi", "Heilongjiang", "Shanxi", "Guizhou", "Chongqing", "Jilin", "Gansu", "Inner Mongolia", "Xinjiang", "Tianjin", "Qinghai", "Hainan", "Ningxia", "Tibet"],
-            "Colombia": ["Bogotá", "Antioquia", "Valle del Cauca", "Atlántico", "Santander", "Bolívar", "Cundinamarca", "Norte de Santander", "Córdoba", "Tolima", "Huila", "Nariño", "Meta", "Cesar", "Boyacá", "Sucre", "La Guajira", "Cauca", "Magdalena", "Caldas", "Risaralda", "Quindío", "Casanare", "Chocó", "Caquetá", "Putumayo", "Arauca", "San Andrés y Providencia", "Amazonas", "Guainía", "Guaviare", "Vaupés", "Vichada"],
-            "Egypt": ["Cairo", "Alexandria", "Giza", "Shubra El Kheima", "Port Said", "Suez", "Luxor", "Mansoura", "El Mahalla El Kubra", "Tanta", "Asyut", "Ismailia", "Fayyum", "Zagazig", "Aswan", "Damietta", "Damanhur", "Minya", "Beni Suef", "Hurghada", "Qena", "Sohag", "Shibin El Kom", "Banha", "Kafr el-Sheikh", "Arish", "Mallawi", "10th of Ramadan City", "Bilbays", "Marsa Matruh"],
-            "France": ["Île-de-France", "Auvergne-Rhône-Alpes", "Hauts-de-France", "Nouvelle-Aquitaine", "Occitanie", "Grand Est", "Provence-Alpes-Côte d'Azur", "Pays de la Loire", "Normandy", "Brittany", "Bourgogne-Franche-Comté", "Centre-Val de Loire", "Corsica"],
-            "Germany": ["North Rhine-Westphalia", "Bavaria", "Baden-Württemberg", "Lower Saxony", "Hesse", "Saxony", "Rhineland-Palatinate", "Berlin", "Schleswig-Holstein", "Brandenburg", "Saxony-Anhalt", "Thuringia", "Hamburg", "Mecklenburg-Vorpommern", "Saarland", "Bremen"],
-            "India": ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Delhi", "Jammu and Kashmir", "Ladakh", "Puducherry", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep", "Andaman and Nicobar Islands"],
-            "Indonesia": ["Jakarta", "West Java", "East Java", "Central Java", "North Sumatra", "Banten", "South Sulawesi", "Lampung", "Central Sulawesi", "West Sumatra", "South Sumatra", "East Kalimantan", "Riau", "Yogyakarta", "Aceh", "North Sulawesi", "South Kalimantan", "West Sulawesi", "Jambi", "West Nusa Tenggara", "Bengkulu", "Central Kalimantan", "Southeast Sulawesi", "Riau Islands", "Bangka Belitung", "Bali", "Gorontalo", "West Kalimantan", "Maluku", "East Nusa Tenggara", "Papua", "North Maluku", "West Papua"],
-            "Italy": ["Lombardy", "Lazio", "Campania", "Sicily", "Veneto", "Emilia-Romagna", "Piedmont", "Apulia", "Tuscany", "Calabria", "Sardinia", "Liguria", "Marche", "Abruzzo", "Friuli-Venezia Giulia", "Trentino-Alto Adige", "Umbria", "Basilicata", "Molise", "Aosta Valley"],
-            "Japan": ["Tokyo", "Kanagawa", "Osaka", "Aichi", "Saitama", "Chiba", "Hyogo", "Hokkaido", "Fukuoka", "Shizuoka", "Ibaraki", "Kyoto", "Hiroshima", "Sendai", "Niigata", "Kumamoto", "Kagoshima", "Okayama", "Fukushima", "Mie", "Gunma", "Tochigi", "Gifu", "Nagano", "Yamaguchi", "Ehime", "Aomori", "Okinawa", "Shiga", "Nara", "Miyagi", "Nagasaki", "Oita", "Yamagata", "Iwate", "Akita", "Miyazaki", "Toyama", "Yamanashi", "Saga", "Ishikawa", "Wakayama", "Fukui", "Kochi", "Shimane", "Tokushima", "Tottori"],
-            "Mexico": ["Mexico City", "State of Mexico", "Jalisco", "Veracruz", "Puebla", "Guanajuato", "Chiapas", "Nuevo León", "Michoacán", "Oaxaca", "Chihuahua", "Guerrero", "Tamaulipas", "Baja California", "Sinaloa", "Coahuila", "Hidalgo", "Sonora", "San Luis Potosí", "Tabasco", "Yucatán", "Querétaro", "Morelos", "Durango", "Zacatecas", "Quintana Roo", "Tlaxcala", "Aguascalientes", "Nayarit", "Campeche", "Baja California Sur", "Colima"],
-            "Nigeria": ["Lagos", "Kano", "Ibadan", "Kaduna", "Port Harcourt", "Benin City", "Maiduguri", "Zaria", "Aba", "Jos", "Ilorin", "Oyo", "Enugu", "Abeokuta", "Abuja", "Sokoto", "Onitsha", "Warri", "Okene", "Calabar", "Uyo", "Katsina", "Ado-Ekiti", "Ogbomoso", "Akure", "Osogbo", "Bauchi", "Katsina-Ala", "Gombe", "Ikeja", "Agege", "Minna", "Effon-Alaiye", "Ilesa", "Sapele", "Kano", "Kaduna", "Ibadan", "Lagos"],
-            "Russia": ["Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg", "Nizhny Novgorod", "Kazan", "Chelyabinsk", "Omsk", "Samara", "Rostov-on-Don", "Ufa", "Krasnoyarsk", "Perm", "Voronezh", "Volgograd", "Krasnodar", "Saratov", "Tyumen", "Tolyatti", "Izhevsk"],
-            "South Africa": ["Gauteng", "KwaZulu-Natal", "Western Cape", "Eastern Cape", "Limpopo", "Mpumalanga", "North West", "Free State", "Northern Cape"],
-            "Spain": ["Andalusia", "Catalonia", "Community of Madrid", "Valencian Community", "Galicia", "Castile and León", "Basque Country", "Canary Islands", "Castile-La Mancha", "Region of Murcia", "Aragon", "Extremadura", "Balearic Islands", "Asturias", "Navarre", "Cantabria", "La Rioja"],
-            "Turkey": ["Istanbul", "Ankara", "İzmir", "Bursa", "Antalya", "Adana", "Konya", "Şanlıurfa", "Gaziantep", "Kayseri", "Mersin", "Eskişehir", "Diyarbakır", "Samsun", "Denizli", "Adapazarı", "Malatya", "Kahramanmaraş", "Erzurum", "Van"],
-            "United Kingdom": ["England", "Scotland", "Wales", "Northern Ireland"],
-            "United States": ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "District of Columbia"]
-        };
+      // Countries and their states/provinces data
+      const countriesAndStates = {
+        Afghanistan: ["Herat", "Kabul", "Kandahar", "Kunduz", "Mazar-i-Sharif"],
+        Albania: ["Durrës", "Fier", "Shkodër", "Tirana", "Vlorë"],
+        Algeria: ["Algiers", "Annaba", "Blida", "Constantine", "Oran"],
+        Argentina: [
+          "Buenos Aires",
+          "Córdoba",
+          "Mendoza",
+          "Santa Fe",
+          "Tucumán",
+        ],
+        Australia: [
+          "Australian Capital Territory",
+          "New South Wales",
+          "Northern Territory",
+          "Queensland",
+          "South Australia",
+          "Tasmania",
+          "Victoria",
+          "Western Australia",
+        ],
+        Austria: [
+          "Burgenland",
+          "Carinthia",
+          "Lower Austria",
+          "Salzburg",
+          "Styria",
+          "Tyrol",
+          "Upper Austria",
+          "Vienna",
+          "Vorarlberg",
+        ],
+        Bangladesh: [
+          "Barisal",
+          "Chittagong",
+          "Dhaka",
+          "Khulna",
+          "Mymensingh",
+          "Rajshahi",
+          "Rangpur",
+          "Sylhet",
+        ],
+        Belgium: [
+          "Antwerp",
+          "Brussels",
+          "East Flanders",
+          "Flemish Brabant",
+          "Hainaut",
+          "Liège",
+          "Limburg",
+          "Luxembourg",
+          "Namur",
+          "Walloon Brabant",
+          "West Flanders",
+        ],
+        Brazil: [
+          "Acre",
+          "Alagoas",
+          "Amapá",
+          "Amazonas",
+          "Bahia",
+          "Ceará",
+          "Distrito Federal",
+          "Espírito Santo",
+          "Goiás",
+          "Maranhão",
+          "Mato Grosso",
+          "Mato Grosso do Sul",
+          "Minas Gerais",
+          "Paraíba",
+          "Paraná",
+          "Pará",
+          "Pernambuco",
+          "Piauí",
+          "Rio Grande do Norte",
+          "Rio Grande do Sul",
+          "Rio de Janeiro",
+          "Rondônia",
+          "Roraima",
+          "Santa Catarina",
+          "São Paulo",
+          "Sergipe",
+          "Tocantins",
+        ],
+        Canada: [
+          "Alberta",
+          "British Columbia",
+          "Manitoba",
+          "New Brunswick",
+          "Newfoundland and Labrador",
+          "Northwest Territories",
+          "Nova Scotia",
+          "Nunavut",
+          "Ontario",
+          "Prince Edward Island",
+          "Quebec",
+          "Saskatchewan",
+          "Yukon",
+        ],
+        Chile: [
+          "Antofagasta",
+          "Arica y Parinacota",
+          "Atacama",
+          "Aysén",
+          "Biobío",
+          "Coquimbo",
+          "Los Lagos",
+          "Los Ríos",
+          "Magallanes",
+          "Maule",
+          "Ñuble",
+          "O'Higgins",
+          "Santiago Metropolitan",
+          "Tarapacá",
+          "Valparaíso",
+        ],
+        China: [
+          "Anhui",
+          "Beijing",
+          "Chongqing",
+          "Fujian",
+          "Gansu",
+          "Guangdong",
+          "Guangxi",
+          "Guizhou",
+          "Hainan",
+          "Hebei",
+          "Heilongjiang",
+          "Henan",
+          "Hubei",
+          "Hunan",
+          "Inner Mongolia",
+          "Jiangsu",
+          "Jiangxi",
+          "Jilin",
+          "Liaoning",
+          "Ningxia",
+          "Qinghai",
+          "Shaanxi",
+          "Shandong",
+          "Shanghai",
+          "Shanxi",
+          "Sichuan",
+          "Tianjin",
+          "Tibet",
+          "Xinjiang",
+          "Yunnan",
+          "Zhejiang",
+        ],
+        Colombia: [
+          "Amazonas",
+          "Antioquia",
+          "Arauca",
+          "Atlántico",
+          "Bolívar",
+          "Boyacá",
+          "Caldas",
+          "Caquetá",
+          "Casanare",
+          "Cauca",
+          "Cesar",
+          "Chocó",
+          "Córdoba",
+          "Cundinamarca",
+          "Guainía",
+          "Guaviare",
+          "Huila",
+          "La Guajira",
+          "Magdalena",
+          "Meta",
+          "Nariño",
+          "Norte de Santander",
+          "Putumayo",
+          "Quindío",
+          "Risaralda",
+          "San Andrés y Providencia",
+          "Santander",
+          "Sucre",
+          "Tolima",
+          "Valle del Cauca",
+          "Vaupés",
+          "Vichada",
+        ],
+        Egypt: [
+          "10th of Ramadan City",
+          "Alexandria",
+          "Aswan",
+          "Asyut",
+          "Banha",
+          "Beni Suef",
+          "Bilbays",
+          "Cairo",
+          "Damietta",
+          "Damanhur",
+          "El Mahalla El Kubra",
+          "Fayyum",
+          "Giza",
+          "Hurghada",
+          "Ismailia",
+          "Kafr el-Sheikh",
+          "Luxor",
+          "Mallawi",
+          "Mansoura",
+          "Marsa Matruh",
+          "Minya",
+          "Port Said",
+          "Qena",
+          "Shibin El Kom",
+          "Shubra El Kheima",
+          "Sohag",
+          "Suez",
+          "Tanta",
+          "Zagazig",
+        ],
+        France: [
+          "Auvergne-Rhône-Alpes",
+          "Bourgogne-Franche-Comté",
+          "Brittany",
+          "Centre-Val de Loire",
+          "Corsica",
+          "Grand Est",
+          "Hauts-de-France",
+          "Île-de-France",
+          "Normandy",
+          "Nouvelle-Aquitaine",
+          "Occitanie",
+          "Pays de la Loire",
+          "Provence-Alpes-Côte d'Azur",
+        ],
+        Germany: [
+          "Baden-Württemberg",
+          "Bavaria",
+          "Berlin",
+          "Brandenburg",
+          "Bremen",
+          "Hamburg",
+          "Hesse",
+          "Lower Saxony",
+          "Mecklenburg-Vorpommern",
+          "North Rhine-Westphalia",
+          "Rhineland-Palatinate",
+          "Saarland",
+          "Saxony",
+          "Saxony-Anhalt",
+          "Schleswig-Holstein",
+          "Thuringia",
+        ],
+        India: [
+          "Andaman and Nicobar Islands",
+          "Andhra Pradesh",
+          "Arunachal Pradesh",
+          "Assam",
+          "Bihar",
+          "Chandigarh",
+          "Chhattisgarh",
+          "Dadra and Nagar Haveli and Daman and Diu",
+          "Delhi",
+          "Goa",
+          "Gujarat",
+          "Haryana",
+          "Himachal Pradesh",
+          "Jammu and Kashmir",
+          "Jharkhand",
+          "Karnataka",
+          "Kerala",
+          "Ladakh",
+          "Lakshadweep",
+          "Madhya Pradesh",
+          "Maharashtra",
+          "Manipur",
+          "Meghalaya",
+          "Mizoram",
+          "Nagaland",
+          "Odisha",
+          "Puducherry",
+          "Punjab",
+          "Rajasthan",
+          "Sikkim",
+          "Tamil Nadu",
+          "Telangana",
+          "Tripura",
+          "Uttar Pradesh",
+          "Uttarakhand",
+          "West Bengal",
+        ],
+        Indonesia: [
+          "Aceh",
+          "Bali",
+          "Bangka Belitung",
+          "Banten",
+          "Bengkulu",
+          "Central Java",
+          "Central Kalimantan",
+          "Central Sulawesi",
+          "East Java",
+          "East Kalimantan",
+          "East Nusa Tenggara",
+          "Gorontalo",
+          "Jakarta",
+          "Jambi",
+          "Lampung",
+          "Maluku",
+          "North Maluku",
+          "North Sulawesi",
+          "North Sumatra",
+          "Papua",
+          "Riau",
+          "Riau Islands",
+          "Southeast Sulawesi",
+          "South Kalimantan",
+          "South Sulawesi",
+          "South Sumatra",
+          "West Java",
+          "West Kalimantan",
+          "West Nusa Tenggara",
+          "West Papua",
+          "West Sulawesi",
+          "West Sumatra",
+          "Yogyakarta",
+        ],
+        Italy: [
+          "Abruzzo",
+          "Aosta Valley",
+          "Apulia",
+          "Basilicata",
+          "Calabria",
+          "Campania",
+          "Emilia-Romagna",
+          "Friuli-Venezia Giulia",
+          "Lazio",
+          "Liguria",
+          "Lombardy",
+          "Marche",
+          "Molise",
+          "Piedmont",
+          "Sardinia",
+          "Sicily",
+          "Trentino-Alto Adige",
+          "Tuscany",
+          "Umbria",
+          "Veneto",
+        ],
+        Japan: [
+          "Aichi",
+          "Akita",
+          "Aomori",
+          "Chiba",
+          "Ehime",
+          "Fukui",
+          "Fukuoka",
+          "Fukushima",
+          "Gifu",
+          "Gunma",
+          "Hiroshima",
+          "Hokkaido",
+          "Hyogo",
+          "Ibaraki",
+          "Ishikawa",
+          "Iwate",
+          "Kagoshima",
+          "Kanagawa",
+          "Kyoto",
+          "Mie",
+          "Miyagi",
+          "Miyazaki",
+          "Nagano",
+          "Nagasaki",
+          "Nara",
+          "Niigata",
+          "Oita",
+          "Okayama",
+          "Okinawa",
+          "Osaka",
+          "Saga",
+          "Saitama",
+          "Shiga",
+          "Shimane",
+          "Shizuoka",
+          "Sendai",
+          "Tochigi",
+          "Tokushima",
+          "Tokyo",
+          "Tottori",
+          "Toyama",
+          "Wakayama",
+          "Yamagata",
+          "Yamaguchi",
+          "Yamanashi",
+        ],
+        Mexico: [
+          "Aguascalientes",
+          "Baja California",
+          "Baja California Sur",
+          "Campeche",
+          "Chiapas",
+          "Chihuahua",
+          "Coahuila",
+          "Colima",
+          "Durango",
+          "Guanajuato",
+          "Guerrero",
+          "Hidalgo",
+          "Jalisco",
+          "Mexico City",
+          "Michoacán",
+          "Morelos",
+          "Nayarit",
+          "Nuevo León",
+          "Oaxaca",
+          "Puebla",
+          "Querétaro",
+          "Quintana Roo",
+          "San Luis Potosí",
+          "Sinaloa",
+          "Sonora",
+          "State of Mexico",
+          "Tabasco",
+          "Tamaulipas",
+          "Tlaxcala",
+          "Veracruz",
+          "Yucatán",
+          "Zacatecas",
+        ],
+        Nigeria: [
+          "Aba",
+          "Abuja",
+          "Abeokuta",
+          "Ado-Ekiti",
+          "Agege",
+          "Akure",
+          "Bauchi",
+          "Benin City",
+          "Calabar",
+          "Effon-Alaiye",
+          "Enugu",
+          "Gombe",
+          "Ibadan",
+          "Ikeja",
+          "Ilesa",
+          "Ilorin",
+          "Jos",
+          "Kaduna",
+          "Kano",
+          "Katsina",
+          "Katsina-Ala",
+          "Lagos",
+          "Maiduguri",
+          "Minna",
+          "Ogbomoso",
+          "Okene",
+          "Onitsha",
+          "Osogbo",
+          "Oyo",
+          "Port Harcourt",
+          "Sapele",
+          "Sokoto",
+          "Uyo",
+          "Warri",
+          "Zaria",
+        ],
+        Russia: [
+          "Chelyabinsk",
+          "Izhevsk",
+          "Kazan",
+          "Krasnodar",
+          "Krasnoyarsk",
+          "Moscow",
+          "Nizhny Novgorod",
+          "Novosibirsk",
+          "Omsk",
+          "Perm",
+          "Rostov-on-Don",
+          "Saint Petersburg",
+          "Samara",
+          "Saratov",
+          "Tolyatti",
+          "Tyumen",
+          "Ufa",
+          "Volgograd",
+          "Voronezh",
+          "Yekaterinburg",
+        ],
+        "South Africa": [
+          "Eastern Cape",
+          "Free State",
+          "Gauteng",
+          "KwaZulu-Natal",
+          "Limpopo",
+          "Mpumalanga",
+          "North West",
+          "Northern Cape",
+          "Western Cape",
+        ],
+        Spain: [
+          "Andalusia",
+          "Aragon",
+          "Asturias",
+          "Balearic Islands",
+          "Basque Country",
+          "Canary Islands",
+          "Cantabria",
+          "Castile and León",
+          "Castile-La Mancha",
+          "Catalonia",
+          "Community of Madrid",
+          "Extremadura",
+          "Galicia",
+          "La Rioja",
+          "Navarre",
+          "Region of Murcia",
+          "Valencian Community",
+        ],
+        Turkey: [
+          "Adana",
+          "Adapazarı",
+          "Ankara",
+          "Antalya",
+          "Bursa",
+          "Denizli",
+          "Diyarbakır",
+          "Erzurum",
+          "Eskişehir",
+          "Gaziantep",
+          "Istanbul",
+          "İzmir",
+          "Kahramanmaraş",
+          "Kayseri",
+          "Konya",
+          "Malatya",
+          "Mersin",
+          "Samsun",
+          "Şanlıurfa",
+          "Van",
+        ],
+        "United Kingdom": ["England", "Northern Ireland", "Scotland", "Wales"],
+        "United States": [
+          "Alabama",
+          "Alaska",
+          "Arizona",
+          "Arkansas",
+          "California",
+          "Colorado",
+          "Connecticut",
+          "Delaware",
+          "District of Columbia",
+          "Florida",
+          "Georgia",
+          "Hawaii",
+          "Idaho",
+          "Illinois",
+          "Indiana",
+          "Iowa",
+          "Kansas",
+          "Kentucky",
+          "Louisiana",
+          "Maine",
+          "Maryland",
+          "Massachusetts",
+          "Michigan",
+          "Minnesota",
+          "Mississippi",
+          "Missouri",
+          "Montana",
+          "Nebraska",
+          "Nevada",
+          "New Hampshire",
+          "New Jersey",
+          "New Mexico",
+          "New York",
+          "North Carolina",
+          "North Dakota",
+          "Ohio",
+          "Oklahoma",
+          "Oregon",
+          "Pennsylvania",
+          "Rhode Island",
+          "South Carolina",
+          "South Dakota",
+          "Tennessee",
+          "Texas",
+          "Utah",
+          "Vermont",
+          "Virginia",
+          "Washington",
+          "West Virginia",
+          "Wisconsin",
+          "Wyoming",
+        ],
+      };
 
-        // Populate countries dropdown
-        function populateCountries() {
-            const countrySelect = document.getElementById('country');
-            const countries = Object.keys(countriesAndStates).sort();
-            
-            countries.forEach(country => {
-                const option = document.createElement('option');
-                option.value = country;
-                option.textContent = country;
-                countrySelect.appendChild(option);
-            });
+      // Populate countries dropdown
+      function populateCountries() {
+        const countrySelect = document.getElementById("country");
+        const countries = Object.keys(countriesAndStates).sort();
+
+        countries.forEach((country) => {
+          const option = document.createElement("option");
+          option.value = country;
+          option.textContent = country;
+          countrySelect.appendChild(option);
+        });
+      }
+
+      // Update states based on selected country
+      function updateStates() {
+        const countrySelect = document.getElementById("country");
+        const stateSelect = document.getElementById("state");
+        const selectedCountry = countrySelect.value;
+
+        // Clear existing options
+        stateSelect.innerHTML =
+          '<option value="">Select State/Province</option>';
+
+        if (selectedCountry && countriesAndStates[selectedCountry]) {
+          const states = countriesAndStates[selectedCountry];
+          states.forEach((state) => {
+            const option = document.createElement("option");
+            option.value = state;
+            option.textContent = state;
+            stateSelect.appendChild(option);
+          });
+          stateSelect.disabled = false;
+        } else {
+          stateSelect.innerHTML =
+            '<option value="">Select Country First</option>';
+          stateSelect.disabled = true;
         }
+      }
 
-        // Update states based on selected country
-        function updateStates() {
-            const countrySelect = document.getElementById('country');
-            const stateSelect = document.getElementById('state');
-            const selectedCountry = countrySelect.value;
-            
-            // Clear existing options
-            stateSelect.innerHTML = '<option value="">Select State/Province</option>';
-            
-            if (selectedCountry && countriesAndStates[selectedCountry]) {
-                const states = countriesAndStates[selectedCountry];
-                states.forEach(state => {
-                    const option = document.createElement('option');
-                    option.value = state;
-                    option.textContent = state;
-                    stateSelect.appendChild(option);
-                });
-                stateSelect.disabled = false;
+      // Initialize countries on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        populateCountries();
+
+        // Add event listener for country change
+        document
+          .getElementById("country")
+          .addEventListener("change", updateStates);
+      });
+
+      document
+        .getElementById("restaurantForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const form = e.target;
+          const submitBtn = form.querySelector('input[type="submit"]');
+          submitBtn.value = "Creating Restaurant...";
+          submitBtn.disabled = true;
+
+          const formData = new FormData(form);
+
+          try {
+            const response = await fetch(
+              "http://127.0.0.1:8000/pyrestaurant/create",
+              {
+                method: "POST",
+                body: formData,
+                credentials: "include",
+              }
+            );
+
+            if (response.ok) {
+              const result = await response.json();
+              console.log("Success:", result);
+
+              form.style.display = "none";
+              document.getElementById("successMessage").style.display = "block";
             } else {
-                stateSelect.innerHTML = '<option value="">Select Country First</option>';
-                stateSelect.disabled = true;
+              const errorData = await response.json();
+              console.error("Server returned error:", errorData);
+              alert("Error: " + JSON.stringify(errorData));
             }
-        }
-
-        // Initialize countries on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            populateCountries();
-            
-            // Add event listener for country change
-            document.getElementById('country').addEventListener('change', updateStates);
+          } catch (error) {
+            console.error("Fetch error:", error);
+            alert(
+              "Network error. Please check if the server is running and CORS is configured."
+            );
+          } finally {
+            submitBtn.value = "Create Restaurant";
+            submitBtn.disabled = false;
+          }
         });
 
-        document.getElementById('restaurantForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
+      function resetForm() {
+        document.getElementById("restaurantForm").style.display = "block";
+        document.getElementById("successMessage").style.display = "none";
+        document.getElementById("restaurantForm").reset();
+        // Reset state dropdown
+        document.getElementById("state").innerHTML =
+          '<option value="">Select Country First</option>';
+        document.getElementById("state").disabled = true;
+      }
 
-            const form = e.target;
-            const submitBtn = form.querySelector('input[type="submit"]');
-            submitBtn.value = 'Creating Restaurant...';
-            submitBtn.disabled = true;
-
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch('http://127.0.0.1:8000/pyrestaurant/create', {
-                    method: 'POST',
-                    body: formData,
-                    credentials: 'include'
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log("Success:", result);
-
-                    form.style.display = 'none';
-                    document.getElementById('successMessage').style.display = 'block';
-                } else {
-                    const errorData = await response.json();
-                    console.error("Server returned error:", errorData);
-                    alert("Error: " + JSON.stringify(errorData));
-                }
-
-            } catch (error) {
-                console.error("Fetch error:", error);
-                alert("Network error. Please check if the server is running and CORS is configured.");
-            } finally {
-                submitBtn.value = 'Create Restaurant';
-                submitBtn.disabled = false;
-            }
-        });
-
-        function resetForm() {
-            document.getElementById('restaurantForm').style.display = 'block';
-            document.getElementById('successMessage').style.display = 'none';
-            document.getElementById('restaurantForm').reset();
-            // Reset state dropdown
-            document.getElementById('state').innerHTML = '<option value="">Select Country First</option>';
-            document.getElementById('state').disabled = true;
-        }
-
-        function goToAddFood() {
-            window.location.href = 'add-food.html';
-        }
+      function goToAddFood() {
+        window.location.href = "add-food.html";
+      }
     </script>
-</body>
+  </body>
 </html>
