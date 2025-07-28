@@ -67,6 +67,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5000',
     'http://127.0.0.1:5500', 
     'http://localhost:5500',
+    'pyrestaurant.netify.app',
+    'https://restaurant-app-1-372a.onrender.com/',
 ]
 CORS_ALLOW_CREDENTIALS = True
 
