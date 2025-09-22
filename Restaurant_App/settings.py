@@ -67,8 +67,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5000',
     'http://127.0.0.1:5500', 
     'http://localhost:5500',
-    'pyrestaurant.netify.app',
-    'https://restaurant-app-1-372a.onrender.com/',
+    'https://restaurant-app-1-372a.onrender.com',
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -105,9 +104,9 @@ DATABASES = {
 
 DATABASES["default"] = dj_database_url.parse(DB_URL)
 
-DATABASES["default"]["OPTIONS"] = {
-    "options": "-c search_path=restaurant_backend"
-}
+# DATABASES["default"]["OPTIONS"] = {
+#     "options": "-c search_path=restaurant_backend"
+# }
 
 
 # Password validation
