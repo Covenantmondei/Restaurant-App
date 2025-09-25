@@ -59,7 +59,6 @@ async function populateRestaurants() {
         option.textContent = item.restaurant.name;
         select.appendChild(option);
       });
-      console.log(data)
       if (data.length ===0 ){
         select.innerHTML = '<option value="">No restaurants found</option>';
       }
