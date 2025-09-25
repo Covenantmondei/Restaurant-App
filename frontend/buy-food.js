@@ -54,17 +54,14 @@ async function searchRestaurants() {
   reviewContainer.innerHTML = "";
 
   if (!searchTerm) {
-    resultsDiv.innerHTML =
-      '<div class="no-results"><h3>Please enter a restaurant name to search.</h3></div>';
+    window.location.reload();
     return;
   }
 
   console.log("Searching for:", searchTerm);
   try {
     const response = await fetch(
-      `https://restaurant-app-6rtf.onrender.com/pyrestaurant/search/?restaurant=${encodeURIComponent(
-        searchTerm
-      )}`
+      `https://restaurant-app-6rtf.onrender.com/pyrestaurant/search/?restaurant=${encodeURIComponent(searchTerm)}`
     );
     if (response.ok) {
       const data = await response.json();
@@ -395,7 +392,7 @@ document.addEventListener("DOMContentLoaded", function () {
       customerContainer.innerHTML = ""; // Clear if previously filled
 
       if (data.length === 0) {
-        customerContainer.innerHTML = "<p>No top customers found.</p>";
+        customerContainer.innerHTML = '<div class="no-results"><h3>Top customer found.</h3></div>';
         return;
       }
 
@@ -431,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function () {
       customerContainer.innerHTML = ""; // Clear if previously filled
 
       if (data.length === 0) {
-        customerContainer.innerHTML = "<p>No top reviews found.</p>";
+        customerContainer.innerHTML = '<div class="no-results"><h3>Top customer found.</h3></div>';
         return;
       }
 
