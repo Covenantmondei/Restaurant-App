@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import os, dotenv, dj_database_url
+# import os, dotenv, dj_database_url
 
-dotenv.load_dotenv()
+# dotenv.load_dotenv()
 
-DB_URL = os.environ.get('DATABASE_URL')
+# DB_URL = os.environ.get('DATABASE_URL')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -97,12 +97,16 @@ WSGI_APPLICATION = 'Restaurant_App.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mypostgresql_2qm5',
+        'USER': 'battleangel',
+        'PASSWORD': '0LpfajdGL3WezzDZu3MdIZoS9K21TBcn',
+        'HOST' : 'dpg-d38lcqmmcj7s738elspg-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
-DATABASES["default"] = dj_database_url.parse(DB_URL)
+# DATABASES["default"] = dj_database_url.parse(DB_URL)
 
 # DATABASES["default"]["OPTIONS"] = {
 #     "options": "-c search_path=restaurant_backend"
