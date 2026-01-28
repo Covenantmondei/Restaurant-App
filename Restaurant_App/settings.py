@@ -62,7 +62,7 @@ MIDDLEWARE = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    'https://restaurant-app-6rtf.onrender.com',
+    'https://restaurant-ma9e.onrender.com',
     'http://localhost:8000',
     'http://localhost:5000',
     'http://127.0.0.1:5500', 

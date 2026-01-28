@@ -186,6 +186,6 @@ class TopReviews(APIView):
         return Response(serializers.data)
     
 
-# class Home(APIView):
-    # def get(self, request):
-    #     return Response({"message":"Hello world"})
+class Health(APIView):
+    def get(self, request):
+        return Response({"status":"OK"})

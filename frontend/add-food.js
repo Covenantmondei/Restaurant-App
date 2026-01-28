@@ -13,7 +13,7 @@ document
 
     try {
       const response = await fetch(
-        "https://restaurant-app-6rtf.onrender.com/pyrestaurant/food/add",
+        "https://restaurant-ma9e.onrender.com/pyrestaurant/food/add",
         {
           method: "POST",
           headers: {
@@ -49,7 +49,7 @@ async function populateRestaurants() {
   const select = document.getElementById("restaurant");
   try {
     const response = await fetch(
-      "https://restaurant-app-6rtf.onrender.com/pyrestaurant/getall"
+      "https://restaurant-ma9e.onrender.com/pyrestaurant/getall"
     );
     if (response.ok) {
       const data = await response.json();
@@ -59,7 +59,7 @@ async function populateRestaurants() {
         option.textContent = item.restaurant.name;
         select.appendChild(option);
       });
-      if (data.length ===0 ){
+      if (data.length === 0) {
         select.innerHTML = '<option value="">No restaurants found</option>';
       }
     } else {

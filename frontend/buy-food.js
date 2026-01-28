@@ -5,11 +5,10 @@ function createRestaurantCard(restaurant, foods) {
             <h3 class="restaurant-name">${restaurant.name}</h3>
             <div class="rating">
                 <span class="stars">${"★".repeat(
-                  Math.round(restaurant.rating || 0)
-                )}${"☆".repeat(5 - Math.round(restaurant.rating || 0))}</span>
-                <span class="rating-number">${
-                  restaurant.rating ? restaurant.rating.toFixed(1) : "0"
-                }</span>
+    Math.round(restaurant.rating || 0)
+  )}${"☆".repeat(5 - Math.round(restaurant.rating || 0))}</span>
+                <span class="rating-number">${restaurant.rating ? restaurant.rating.toFixed(1) : "0"
+    }</span>
             </div>
         </div>
         <div class="restaurant-details">
@@ -30,14 +29,14 @@ function createRestaurantCard(restaurant, foods) {
             <h4>Menu</h4>
             <ul>
                 ${foods
-                  .map((food) => `<li>${food.name} - $${food.price}</li>`)
-                  .join("")}
+      .map((food) => `<li>${food.name} - $${food.price}</li>`)
+      .join("")}
             </ul>
         </div>
         <button class="buy-food-btn" onclick="openBuyFoodForm('${restaurant.name.replace(
-          /'/g,
-          "\\'"
-        )}', '${encodeURIComponent(JSON.stringify(foods))}')">Buy Food</button>
+        /'/g,
+        "\\'"
+      )}', '${encodeURIComponent(JSON.stringify(foods))}')">Buy Food</button>
     </div>
     `;
 }
@@ -61,7 +60,7 @@ async function searchRestaurants() {
   console.log("Searching for:", searchTerm);
   try {
     const response = await fetch(
-      `https://restaurant-app-6rtf.onrender.com/pyrestaurant/search/?restaurant=${encodeURIComponent(searchTerm)}`
+      `https://restaurant-ma9e.onrender.com/pyrestaurant/search/?restaurant=${encodeURIComponent(searchTerm)}`
     );
     if (response.ok) {
       const data = await response.json();
@@ -78,13 +77,12 @@ async function searchRestaurants() {
           item.innerHTML = `
                         <div class="customer-item">
                             <div class="customer-avatar">${customer.name
-                              .slice(0, 2)
-                              .toUpperCase()}</div>
+              .slice(0, 2)
+              .toUpperCase()}</div>
                             <div class="customer-info">
                                 <h4>${customer.name}</h4>
-                                <p>${customer.order_no} orders • ${
-            customer.restaurant
-          }</p>
+                                <p>${customer.order_no} orders • ${customer.restaurant
+            }</p>
                             </div>
                         </div>
                     `;
@@ -102,14 +100,13 @@ async function searchRestaurants() {
           item.innerHTML = `
                         <div class="review-item">
                             <div class="review-header">
-                                <span class="reviewer-name">${
-                                  review.customer
-                                } • ${review.restaurant_name}</span>
+                                <span class="reviewer-name">${review.customer
+            } • ${review.restaurant_name}</span>
                                 <span class="review-rating">${"★".repeat(
-                                  Math.round(review.rating || 0)
-                                )}${"☆".repeat(
-            5 - Math.round(review.rating || 0)
-          )}</span>
+              Math.round(review.rating || 0)
+            )}${"☆".repeat(
+              5 - Math.round(review.rating || 0)
+            )}</span>
                             </div>
                             <p class="review-text">"${review.comment}"</p>
                         </div>
@@ -136,7 +133,7 @@ async function loadAllRestaurants() {
 
   try {
     const response = await fetch(
-      "https://restaurant-app-6rtf.onrender.com/pyrestaurant/all"
+      "https://restaurant-ma9e.onrender.com/pyrestaurant/all"
     );
     if (response.ok) {
       const restaurants = await response.json();
@@ -321,7 +318,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
       try {
         const response = await fetch(
-          "https://restaurant-app-6rtf.onrender.com/pyrestaurant/food/buy",
+          "https://restaurant-ma9e.onrender.com/pyrestaurant/food/buy",
           {
             method: "POST",
             headers: {
@@ -385,7 +382,7 @@ document.querySelector(".search-btn").addEventListener("click", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("https://restaurant-app-6rtf.onrender.com/pyrestaurant/customers/")
+  fetch("https://restaurant-ma9e.onrender.com/pyrestaurant/customers/")
     .then((response) => response.json())
     .then((data) => {
       const customerContainer = document.getElementById("topCustomers");
@@ -402,13 +399,12 @@ document.addEventListener("DOMContentLoaded", function () {
         item.innerHTML = `
                     <div class="customer-item">
                         <div class="customer-avatar">${customer.name
-                          .slice(0, 2)
-                          .toUpperCase()}</div>
+            .slice(0, 2)
+            .toUpperCase()}</div>
                         <div class="customer-info">
                             <h4>${customer.name}</h4>
-                            <p>${customer.order_no} orders • ${
-          customer.restaurant
-        }</p>
+                            <p>${customer.order_no} orders • ${customer.restaurant
+          }</p>
                         </div>
                     </div>
                 `;
@@ -421,7 +417,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("https://restaurant-app-6rtf.onrender.com/pyrestaurant/reviews/")
+  fetch("https://restaurant-ma9e.onrender.com/pyrestaurant/reviews/")
     .then((response) => response.json())
     .then((data) => {
       const customerContainer = document.getElementById("customerReviews");
@@ -438,14 +434,13 @@ document.addEventListener("DOMContentLoaded", function () {
         item.innerHTML = `
                     <div class="review-item">
                         <div class="review-header">
-                            <span class="reviewer-name">${reviews.customer} • ${
-          reviews.restaurant_name
-        }</span>
+                            <span class="reviewer-name">${reviews.customer} • ${reviews.restaurant_name
+          }</span>
                             <span class="review-rating">${"★".repeat(
-                              Math.round(reviews.rating || 0)
-                            )}${"☆".repeat(
-          5 - Math.round(reviews.rating || 0)
-        )}</span>
+            Math.round(reviews.rating || 0)
+          )}${"☆".repeat(
+            5 - Math.round(reviews.rating || 0)
+          )}</span>
                         </div>
                         <p class="review-text">"${reviews.comment}"</p>
                     </div>
