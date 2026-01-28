@@ -8,7 +8,7 @@ class Restaurant(models.Model):
     rating = models.FloatField(null=True, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
 
@@ -19,7 +19,7 @@ class Food(models.Model):
     image = models.ImageField(upload_to='food_images/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
 
@@ -31,8 +31,8 @@ class Review(models.Model):
     comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
-        return f'Review by {self.customer.name} for {self.restaurant.name}'
+    def __str__(self):
+        return f'Review by {self.customer} for {self.restaurant.name}'
 
 
 class Customers(models.Model):
@@ -40,5 +40,5 @@ class Customers(models.Model):
     name = models.CharField(max_length=100)
     order_no = models.IntegerField(default=0, blank=True, null=True)
 
-    def _str_(self):
+    def __str__(self):
         return self.name
