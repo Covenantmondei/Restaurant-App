@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-# import os, dotenv, dj_database_url
+import os, dotenv, dj_database_url
 
-# dotenv.load_dotenv()
+dotenv.load_dotenv()
 
 # DB_URL = os.environ.get('DATABASE_URL')
 
@@ -96,14 +96,7 @@ WSGI_APPLICATION = 'Restaurant_App.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mypostgresql_2qm5',
-        'USER': 'battleangel',
-        'PASSWORD': '0LpfajdGL3WezzDZu3MdIZoS9K21TBcn',
-        'HOST' : 'dpg-d38lcqmmcj7s738elspg-a.oregon-postgres.render.com',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
 
 # DATABASES["default"] = dj_database_url.parse(DB_URL)
